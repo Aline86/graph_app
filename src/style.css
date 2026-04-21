@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+#app {
+  width: 100%;
+  position: absolute;
+  height: 100vh;
+}
+
+.graph {
+  position: absolute;
+
+  margin: 0 auto;
+}
+
+#svg-layer {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: none;
+  overflow: visible;
+}
+.node:hover .button_container {
+  position: relative;
+  z-index: 999;
+}
+button,
+.node {
+  cursor: pointer;
+}
+#button_container {
+  z-index: 999;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.none {
+  display: none;
+}
+.active {
+  display: inline-block;
+}
+
+.activated {
+  border: green 1px solid;
+  color: green;
+  padding: 15px;
+}
+#add_node.activated {
+  border: black 1px solid;
+  color: black;
+  padding: 10px;
+}
+.inactive {
+  pointer-events: none;
+  border: lightgray;
+  color: lightgray;
+}
+#button_container button {
+  width: 250px;
+
+  background-color: white;
+  border-radius: 3px;
+  margin: 5px;
+  padding: 10px;
+  font-size: 25px;
+}
+.node button {
+  width: 150px;
+
+  background-color: white;
+  border-radius: 3px;
+  margin: 5px;
+  padding: 5px;
+  font-size: 15px;
+}
+.node {
+  max-width: 50px;
+}
+.node input {
+  background-color: rgb(161, 196, 235);
+  z-index: 9999;
+}
+.absolute {
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999999;
+}
+.node:hover .absolute {
+  max-width: 50px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.node:hover > input {
+  background-color: blueviolet;
+}
+.node:hover > input {
+  border: 3px solid blueviolet;
+}
+input {
+  border: 1px solid black;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+  text-align: center;
+}
+.arrow {
+  border: 3px solid black;
+  position: absolute;
+}
+
+#add_node {
+  display: block;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 10px;
+}
