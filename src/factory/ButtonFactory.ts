@@ -1,5 +1,7 @@
+import App from "../App";
 import type CustomEvents from "../events/CustomEvents";
 import type Button from "../model/Button";
+import FigureRegistry from "../registry/FigureRegistry";
 import type ButtonViewModel from "../viewmodel/ButtonViewModel";
 
 const buttonStatus = {
@@ -14,6 +16,8 @@ type ButtonStatusValue = (typeof buttonStatus)[ButtonStatusKey];
 export default class ButtonFactory {
   private static button_vm: ButtonViewModel;
   private static bus: CustomEvents;
+  private static actions = FigureRegistry.getAll();
+
   static init(button_vm: ButtonViewModel, bus: CustomEvents): void {
     ButtonFactory.button_vm = button_vm;
     ButtonFactory.bus = bus;
@@ -40,6 +44,7 @@ export default class ButtonFactory {
     document.getElementById(container)?.appendChild(button);
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
+        App.activeActionKey = id;
         action(B);
         ButtonFactory.bus.deactivate_all_actions();
         if ((e.target as HTMLElement)?.id !== undefined) {

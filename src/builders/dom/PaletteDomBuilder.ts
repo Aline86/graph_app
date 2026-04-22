@@ -1,3 +1,4 @@
+import App from "../../App";
 import type CustomEvents from "../../events/CustomEvents";
 import ButtonFactory from "../../factory/ButtonFactory";
 import Button from "../../model/Button";
@@ -6,7 +7,6 @@ import FigureRegistry from "../../registry/FigureRegistry";
 import type DomBuilder from "./DomBuilder";
 
 export default class PaletteDomBuilder implements DomBuilder<Button> {
-  private activeActionKey: string | null = null;
   actions: FigureAction[];
   container: HTMLElement;
   bus: CustomEvents;
@@ -34,15 +34,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
           action.action,
           action.name,
           action.id,
-          () => {
-            if (this.activeActionKey && this.activeActionKey !== action.id) {
-              this.bus.deactivate_all_actions();
-              const old = document.getElementById(this.activeActionKey);
-              if (old) old.className = "active";
-            }
-            this.activeActionKey =
-              this.activeActionKey === action.id ? null : action.id;
-          },
+          action.handler,
           "button_container",
         );
       }
@@ -53,10 +45,6 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
 
     if (el) el.className = state;
   };
-
-  get_active_action(): FigureAction | null {
-    return this.actions.find((a) => a.id === this.activeActionKey) ?? null;
-  }
 
   update = () => {};
   delete = () => {};

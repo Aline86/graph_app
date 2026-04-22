@@ -15,6 +15,7 @@ import NodeMenuView from "./view/NodeMenuView";
 import ButtonViewModel from "./viewmodel/ButtonViewModel";
 
 export default class App extends DomUtils {
+  static activeActionKey: string | null = null;
   container: HTMLElement | null = null;
   graph: Graph;
   button_vm: ButtonViewModel;
@@ -23,6 +24,7 @@ export default class App extends DomUtils {
 
   constructor(graph: Graph, container_name: string, bus: AlgorithmEvents) {
     super();
+
     this.container = document.createElement("div");
     this.container.id = graph.id;
     document.querySelector(container_name)?.appendChild(this.container);
