@@ -1,7 +1,6 @@
 import App from "../App";
 import type CustomEvents from "../events/CustomEvents";
 import type Button from "../model/Button";
-import FigureRegistry from "../registry/FigureRegistry";
 import type ButtonViewModel from "../viewmodel/ButtonViewModel";
 
 const buttonStatus = {

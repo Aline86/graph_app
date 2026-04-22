@@ -1,7 +1,6 @@
 import MenuDomBuilder from "../builders/dom/MenuDomBuilder";
 import type CustomEvents from "../events/CustomEvents";
 import type NodeViewModel from "../viewmodel/NodeViewModel";
-import AddNodeButtonEventListener from "./buttons/AddNodeButtonEventListener";
 import MoveNodeEventListener from "./node_events/MoveNodeEventListener";
 
 export default class NodeEventHandler {
