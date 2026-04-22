@@ -1,4 +1,5 @@
 import type CustomEvents from "../events/CustomEvents";
+import FigureRegistry from "../registry/FigureRegistry";
 import type GraphViewModel from "../viewmodel/GraphViewModel";
 
 export default class GraphEventHandler {
@@ -9,7 +10,7 @@ export default class GraphEventHandler {
     this.graph_vm = graph_vm;
 
     this.bus = bus;
-
+    FigureRegistry.update_handler("remove_node", this.remove_node);
     this.on_node_position_update();
   }
 

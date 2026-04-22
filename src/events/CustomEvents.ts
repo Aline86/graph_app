@@ -6,7 +6,11 @@ export default class CustomEvents extends EventTarget {
   constructor() {
     super();
   }
+  deactivate_all_actions() {
+    let event = new CustomEvent("deactivate:actions", {});
 
+    this.dispatchEvent(event);
+  }
   update_coordinates(node: Node) {
     let event = new CustomEvent("node:position:update", {
       detail: {

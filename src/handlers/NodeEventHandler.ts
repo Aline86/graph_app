@@ -21,8 +21,6 @@ export default class NodeEventHandler {
     this.menu_db = menu_db;
     this.bus = bus;
     this.move_listener = new MoveNodeEventListener(this.node_vm, menu_db, bus);
-
-    new AddNodeButtonEventListener(this.node_vm, this.menu_db, bus, container);
   }
 
   destroy() {

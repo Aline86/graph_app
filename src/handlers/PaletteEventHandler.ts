@@ -10,6 +10,7 @@ export default class PaletteEventHandler {
   palette_db: PaletteDomBuilder;
   button_vm: ButtonViewModel;
   container: HTMLElement | null;
+
   constructor(
     palette_db: PaletteDomBuilder,
     button_vm: ButtonViewModel,
@@ -27,6 +28,8 @@ export default class PaletteEventHandler {
 
   activate_palette_actions = () => {
     this.container?.addEventListener("click", (e: MouseEvent) => {
+      const action = this.palette_db.get_active_action();
+
       const nodeEl = (e.target as HTMLElement).closest(
         ".node",
       ) as HTMLElement | null;
@@ -34,8 +37,6 @@ export default class PaletteEventHandler {
 
       const node = this.nodes[nodeEl.id];
       if (!node) return;
-
-      const action = this.palette_db.get_active_action();
 
       if (!action) return;
 

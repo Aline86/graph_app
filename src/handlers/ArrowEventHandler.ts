@@ -31,6 +31,8 @@ export default class ArrowEventHandler extends DomUtils {
       action: "click",
       handler: this.detect_click,
     });
+
+    this.deactivate_all_actions();
   }
 
   detect_click = (node?: Node) => {
@@ -39,7 +41,14 @@ export default class ArrowEventHandler extends DomUtils {
       ? this.start_drawing(node)
       : this.finish_drawing(node);
   };
-
+  deactivate_all_actions = () => {
+    this.bus.addEventListener("deactivate:actions", () => {
+      if (this.state.handler) {
+        document.removeEventListener("mousemove", this.state.handler);
+      }
+      this.state = { status: "still", arrow: null, handler: null };
+    });
+  };
   private start_drawing(node: Node) {
     const arrow = this.create_arrow(node.id);
     if (!arrow) return;

@@ -21,15 +21,13 @@ export default class NodeMenuEventHandler {
     this.container = container;
     this.node_vm = node_vm;
     this.menu_db = menu_db;
-
+    new AddNodeButtonEventListener(this.node_vm, this.menu_db, bus, container);
     this.move_listener = new MoveNodeEventListener(this.node_vm, menu_db, bus);
     this.rename_listener = new RenameNodeEventListener(
       this.node_vm,
       menu_db,
       bus,
     );
-
-    new AddNodeButtonEventListener(this.node_vm, this.menu_db, bus, container);
   }
 
   destroy() {

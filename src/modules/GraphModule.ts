@@ -31,11 +31,6 @@ export default class GraphModule implements Module {
 
   install(bus: CustomEvents, container: HTMLElement) {
     const graph = new GraphView(container, this.graph, bus);
-
-    FigureRegistry.update_handler(
-      "remove_node",
-      graph.graph_handler.remove_node,
-    );
     const arrow_module = new ArrowModule(this.graph);
     arrow_module.install(bus, container);
     const node_module = new NodeModule(this.graph);

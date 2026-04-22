@@ -32,7 +32,7 @@ export default class App extends DomUtils {
     document.querySelector(container_name)?.appendChild(this.container);
     this.graph = graph;
 
-    // StorageModule.clear();
+    //StorageModule.clear();
     this.container.className = "graph";
 
     ArrowModule.register();
@@ -44,7 +44,7 @@ export default class App extends DomUtils {
     const graph_module = new GraphModule(this.graph);
     this.button_vm = new ButtonViewModel(this.graph, bus);
 
-    ButtonFactory.init(this.button_vm);
+    ButtonFactory.init(this.button_vm, bus);
 
     this.button_db = new ButtonDomBuilder(this.button_vm, bus);
 

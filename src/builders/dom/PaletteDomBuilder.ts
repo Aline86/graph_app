@@ -35,6 +35,11 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
           action.name,
           action.id,
           () => {
+            if (this.activeActionKey && this.activeActionKey !== action.id) {
+              this.bus.deactivate_all_actions();
+              const old = document.getElementById(this.activeActionKey);
+              if (old) old.className = "active";
+            }
             this.activeActionKey =
               this.activeActionKey === action.id ? null : action.id;
           },

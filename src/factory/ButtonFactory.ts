@@ -1,3 +1,4 @@
+import type CustomEvents from "../events/CustomEvents";
 import type Button from "../model/Button";
 import type ButtonViewModel from "../viewmodel/ButtonViewModel";
 
@@ -12,9 +13,10 @@ type ButtonStatusValue = (typeof buttonStatus)[ButtonStatusKey];
 
 export default class ButtonFactory {
   private static button_vm: ButtonViewModel;
-
-  static init(button_vm: ButtonViewModel): void {
+  private static bus: CustomEvents;
+  static init(button_vm: ButtonViewModel, bus: CustomEvents): void {
     ButtonFactory.button_vm = button_vm;
+    ButtonFactory.bus = bus;
   }
 
   static create_button(
@@ -39,7 +41,7 @@ export default class ButtonFactory {
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
         action(B);
-
+        ButtonFactory.bus.deactivate_all_actions();
         if ((e.target as HTMLElement)?.id !== undefined) {
           ButtonFactory.button_vm.toggle_state_state(
             (e.target as HTMLElement)?.id,
