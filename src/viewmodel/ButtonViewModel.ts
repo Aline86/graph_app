@@ -9,7 +9,12 @@ export default class ButtonViewModel {
     this.bus = bus;
     this.graph = graph;
   }
-
+  get_button = (id: string) => {
+    const button = Button.get(id);
+    if (button) {
+      return button;
+    }
+  };
   change_button_state = (id: string, state: string) => {
     const button = Button.get(id);
     if (button) {
@@ -24,10 +29,16 @@ export default class ButtonViewModel {
       } else {
         button.set_state(button.state === "activated" ? "active" : "activated");
       }
-
+      this.deactivate_other_buttons(button.id);
       this.notify_button(button);
     }
   };
+  deactivate_other_buttons(id: string) {
+    for (const button of Button.buttons) {
+      if (button.id === id) continue;
+      button.set_state("active");
+    }
+  }
   create_button(name: string) {
     const button = new Button(name);
 

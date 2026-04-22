@@ -3,10 +3,14 @@ import ButtonFactory from "../../factory/ButtonFactory";
 import type Node from "../../model/Node";
 import type { FigureAction } from "../../registry/FigureRegistry";
 import FigureRegistry from "../../registry/FigureRegistry";
+import DomUtils from "../../utils/DomUtils";
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 import type DomBuilder from "./DomBuilder";
 
-export default class NodeDomBuilder implements DomBuilder<Node> {
+export default class NodeDomBuilder
+  extends DomUtils
+  implements DomBuilder<Node>
+{
   node_vm: NodeViewModel;
   bus: CustomEvents;
   container: HTMLElement;
@@ -17,6 +21,7 @@ export default class NodeDomBuilder implements DomBuilder<Node> {
     container: HTMLElement,
     bus: CustomEvents,
   ) {
+    super();
     this.node_vm = node_vm;
     this.actions = [];
     const rename_node = FigureRegistry.get_action_by_id("button_rename_node");
@@ -31,10 +36,31 @@ export default class NodeDomBuilder implements DomBuilder<Node> {
     }
     this.bus = bus;
     this.container = container;
+    this.on_load_node();
   }
+  private on_load_node = () => {
+    this.bus.addEventListener("load:node", (e) => {
+      const N = (e as CustomEvent).detail;
 
-  update = () => {};
+      if (!N) return;
+      const node = N.node;
+
+      this.load(node);
+    });
+  };
+  load = (node?: Node) => {
+    let element = null;
+    if (node) element = this.add(node);
+
+    if (element && node) {
+      this.container?.appendChild(element);
+      this.update_position(node);
+      this.create_node_buttons(node.id);
+      this.bus.activate_buttons();
+    }
+  };
   delete = () => {};
+  update = () => {};
   add_node = (): void => {
     const node = this.node_vm.create_node();
     const element = this.add(node);
@@ -42,7 +68,9 @@ export default class NodeDomBuilder implements DomBuilder<Node> {
     if (element) {
       this.container?.appendChild(element);
       this.create_node_buttons(node.id);
-      this.bus.activate_buttons(); // ← ici c'est correct
+
+      this.bus.activate_buttons();
+      this.bus.add_node();
     }
   };
   add = (node?: Node): HTMLElement | void => {
@@ -65,6 +93,7 @@ export default class NodeDomBuilder implements DomBuilder<Node> {
   add_node_button = (): void => {
     if (this.container) {
       ButtonFactory.create_button(
+        "click",
         "Ajouter un noeud",
         "add_node",
         this.add_node.bind(this),

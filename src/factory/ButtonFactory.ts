@@ -18,6 +18,7 @@ export default class ButtonFactory {
   }
 
   static create_button(
+    trigger_action: string,
     label: string,
     id: string,
     action: (button?: Button) => void,
@@ -35,14 +36,17 @@ export default class ButtonFactory {
     ButtonFactory.button_vm.change_button_state(B.id, status);
 
     document.getElementById(container)?.appendChild(button);
-    button.addEventListener("click", (e) => {
-      action(B);
-      if ((e.target as HTMLElement)?.id !== undefined) {
-        ButtonFactory.button_vm.toggle_state_state(
-          (e.target as HTMLElement)?.id,
-        );
-      }
-    });
+    if (trigger_action !== "") {
+      button.addEventListener(trigger_action, (e) => {
+        action(B);
+
+        if ((e.target as HTMLElement)?.id !== undefined) {
+          ButtonFactory.button_vm.toggle_state_state(
+            (e.target as HTMLElement)?.id,
+          );
+        }
+      });
+    }
     return B;
   }
 }

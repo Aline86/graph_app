@@ -8,7 +8,7 @@ import FigureRegistry from "../../registry/FigureRegistry";
 
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 
-export default class AddNodeButtonEventListener implements EventHandler<Node> {
+export default class AddNodeButtonEventListener {
   node_vm: NodeViewModel;
   menu_db: MenuDomBuilder;
   bus: CustomEvents;
@@ -37,7 +37,6 @@ export default class AddNodeButtonEventListener implements EventHandler<Node> {
       const button = document.getElementById(element.id);
       if (!button) return;
       button.addEventListener("click", () => handler.handler(element));
-      this.bus.activate_buttons();
     }
   };
 }

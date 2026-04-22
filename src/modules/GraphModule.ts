@@ -6,12 +6,19 @@ import GraphView from "../view/GraphView";
 import NodeView from "../view/NodeView";
 import ArrowModule from "./ArrowModule";
 import NodeModule from "./NodeModule";
+import StorageModule from "./StorageModule";
 
 export default class GraphModule implements Module {
   graph: Graph;
   constructor(graph: Graph) {
     this.graph = graph;
+    const stored_graph = StorageModule.load();
+
+    if (stored_graph) {
+      this.graph.init(stored_graph);
+    }
   }
+
   static register() {
     FigureRegistry.register({
       actions_id: NodeView.node_id,
@@ -33,5 +40,6 @@ export default class GraphModule implements Module {
     arrow_module.install(bus, container);
     const node_module = new NodeModule(this.graph);
     node_module.install(bus, container);
+    graph.load_graph();
   }
 }

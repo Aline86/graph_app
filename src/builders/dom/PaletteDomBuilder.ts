@@ -17,7 +17,6 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
     this.actions = [];
 
     const drawArrow = FigureRegistry.get_action_by_id("button_draw_arrow");
-
     if (drawArrow) {
       this.actions.push(drawArrow);
     }
@@ -32,6 +31,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
     if (actions)
       for (const action of actions) {
         ButtonFactory.create_button(
+          action.action,
           action.name,
           action.id,
           () => {

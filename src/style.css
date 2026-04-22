@@ -117,9 +117,16 @@ input {
   position: absolute;
 }
 
-#add_node {
-  display: block;
+#add_node,
+#play_bfs {
+  display: inline-block;
   margin-bottom: 30px;
   background-color: white;
   padding: 10px;
+  left: -50%;
+  transform: translate(50%, 50%);
+  margin-right: 15px;
+}
+.node.visited > input {
+  background-color: rgb(244, 162, 40) !important;
 }

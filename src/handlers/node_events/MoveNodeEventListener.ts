@@ -18,8 +18,12 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
     this.node_db = node_db;
     this.bus = bus;
 
-    bus.addEventListener("arrow:drawing:start", () => (this.drawing = true));
-    bus.addEventListener("arrow:drawing:end", () => (this.drawing = false));
+    bus.addEventListener("arrow:drawing:start", () => {
+      this.drawing = true;
+    });
+    bus.addEventListener("arrow:drawing:end", () => {
+      this.drawing = false;
+    });
     this.on_bus_events();
     this.action();
   }

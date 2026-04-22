@@ -42,15 +42,4 @@ export default class MenuDomBuilder
       input.setAttribute("value", node.name);
     }
   };
-
-  update_position = (node?: Node): void => {
-    if (!node) return;
-    const _node = document.getElementById(node.id);
-
-    if (_node) {
-      _node.style.left = node.position.x + "px";
-      _node.style.top = node.position.y + "px";
-      _node.style.position = "absolute";
-    }
-  };
 }

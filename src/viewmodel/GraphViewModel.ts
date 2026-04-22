@@ -12,6 +12,28 @@ export default class GraphViewModel {
     this.arrow_vm = arrow_vm;
     this.bus = bus;
   }
+
+  load_nodes = () => {
+    const nodes = this.graph.nodes;
+    if (Object.keys(nodes).length > 0)
+      for (const key in nodes) {
+        if (!Object.hasOwn(nodes, key)) continue;
+
+        const node = nodes[key];
+        this.bus.load_node(node);
+      }
+  };
+
+  load_arrows = () => {
+    const arrows = this.graph.arrows;
+    if (Object.keys(arrows).length > 0)
+      for (const key in arrows) {
+        if (!Object.hasOwn(arrows, key)) continue;
+
+        const arrow = arrows[key];
+        this.bus.load_arrow(arrow);
+      }
+  };
   get_linked_arrows(arrow: Arrow, node_id: string) {
     if (arrow.end_node?.id === node_id || arrow.start_node.id === node_id) {
       arrow.calculate_length();

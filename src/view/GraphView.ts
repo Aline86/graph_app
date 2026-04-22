@@ -7,15 +7,29 @@ import GraphEventHandler from "../handlers/GraphEventHandler";
 
 export default class GraphView {
   public static graph_id = "graph_events";
-
+  private arrow_vm: ArrowViewModel;
+  private graph_vm: GraphViewModel;
   graph_db: GraphDomBuilder;
   graph_handler: GraphEventHandler;
+  bus: CustomEvents;
 
   constructor(container: HTMLElement, graph: Graph, bus: CustomEvents) {
-    const arrow_vm = new ArrowViewModel(graph, bus);
-    const graph_vm = new GraphViewModel(graph, arrow_vm, bus);
-
+    this.arrow_vm = new ArrowViewModel(graph, bus);
+    this.graph_vm = new GraphViewModel(graph, this.arrow_vm, bus);
+    this.bus = bus;
     this.graph_db = new GraphDomBuilder(container, bus);
-    this.graph_handler = new GraphEventHandler(graph_vm, this.graph_db, bus);
+    this.graph_handler = new GraphEventHandler(
+      this.graph_vm,
+      this.graph_db,
+      bus,
+    );
+    if (Object.keys(graph.nodes).length > 0) {
+      this.bus.activate_buttons();
+    }
   }
+
+  load_graph = () => {
+    this.graph_vm.load_nodes();
+    this.graph_vm.load_arrows();
+  };
 }

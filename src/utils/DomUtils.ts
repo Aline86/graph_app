@@ -15,7 +15,6 @@ export default class DomUtils {
   };
 
   remove_node_from_dom = (target?: Node) => {
-    console.log("target", target);
     if (!target) return;
     const el = document.getElementById(target.id);
 
@@ -46,11 +45,14 @@ export default class DomUtils {
     }
     return html_nodes;
   }
+  update_position = (node?: Node): void => {
+    if (!node) return;
+    const _node = document.getElementById(node.id);
 
-  create_svg() {
-    const svg = document.createElementNS("http://www.w3.org/1999/xhtml", "svg");
-    svg.id = "svg-layer";
-
-    return svg;
-  }
+    if (_node) {
+      _node.style.left = node.position.x + "px";
+      _node.style.top = node.position.y + "px";
+      _node.style.position = "absolute";
+    }
+  };
 }

@@ -32,12 +32,24 @@ export default class CustomEvents extends EventTarget {
   trigger_arrow_drawing_end() {
     this.dispatchEvent(new CustomEvent("arrow:drawing:end"));
   }
+  load_arrow(arrow: Arrow) {
+    let event = new CustomEvent("load:arrow", {
+      detail: {
+        arrow: arrow,
+      },
+    });
+    this.dispatchEvent(event);
+  }
   trigger_draw_arrow(arrow: Arrow) {
     let event = new CustomEvent("draw:arrow", {
       detail: {
         arrow: arrow,
       },
     });
+    this.dispatchEvent(event);
+  }
+  add_node() {
+    let event = new CustomEvent("add:node", {});
     this.dispatchEvent(event);
   }
   trigger_rename_node(node: Node) {
@@ -56,7 +68,14 @@ export default class CustomEvents extends EventTarget {
     });
     this.dispatchEvent(event);
   }
-
+  load_node(node: Node) {
+    let event = new CustomEvent("load:node", {
+      detail: {
+        node: node,
+      },
+    });
+    this.dispatchEvent(event);
+  }
   remove_rename_node() {
     let event = new CustomEvent("remove:rename:node", {});
     this.dispatchEvent(event);
