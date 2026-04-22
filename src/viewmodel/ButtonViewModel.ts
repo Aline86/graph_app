@@ -37,6 +37,7 @@ export default class ButtonViewModel {
     for (const button of Button.buttons) {
       if (button.id === id) continue;
       button.set_state("active");
+      this.notify_button(button);
     }
   }
   create_button(name: string) {
