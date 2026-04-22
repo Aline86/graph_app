@@ -1,8 +1,5 @@
 import MenuDomBuilder from "../builders/dom/MenuDomBuilder";
-import NodeDomBuilder from "../builders/dom/NodeDomBuilder";
 import type CustomEvents from "../events/CustomEvents";
-import FigureRegistry from "../registry/FigureRegistry";
-import NodeView from "../view/NodeView";
 import type NodeViewModel from "../viewmodel/NodeViewModel";
 import AddNodeButtonEventListener from "./buttons/AddNodeButtonEventListener";
 import MoveNodeEventListener from "./node_events/MoveNodeEventListener";

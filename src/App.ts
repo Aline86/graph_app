@@ -1,7 +1,6 @@
 import ButtonDomBuilder from "./builders/dom/ButtonDomBuilder";
 import PaletteDomBuilder from "./builders/dom/PaletteDomBuilder";
 import type AlgorithmEvents from "./events/AgorithmEvents";
-import CustomEvents from "./events/CustomEvents";
 import ButtonFactory from "./factory/ButtonFactory";
 import PaletteEventHandler from "./handlers/PaletteEventHandler";
 import type Graph from "./model/Graph";

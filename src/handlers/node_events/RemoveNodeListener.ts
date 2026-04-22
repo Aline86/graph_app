@@ -7,7 +7,6 @@ import type NodeViewModel from "../../viewmodel/NodeViewModel";
 
 export default class RemoveNodeEventListener implements EventHandler<Node> {
   private inputChange?: (e: Event) => void;
-  private currentRenameInput?: HTMLElement;
 
   node_vm: NodeViewModel;
   node_db: MenuDomBuilder;

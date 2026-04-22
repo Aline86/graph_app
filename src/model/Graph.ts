@@ -1,6 +1,5 @@
 import Arrow from "./Arrow";
 import Node from "./Node";
-import Position from "./Position";
 
 export default class Graph {
   id: string;

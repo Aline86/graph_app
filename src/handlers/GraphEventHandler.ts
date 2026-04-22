@@ -1,19 +1,13 @@
 import type CustomEvents from "../events/CustomEvents";
 import type GraphViewModel from "../viewmodel/GraphViewModel";
-import type GraphDomBuilder from "../builders/dom/GraphDomBuilder";
 
 export default class GraphEventHandler {
   private graph_vm: GraphViewModel;
-  private graph_db: GraphDomBuilder;
   private bus: CustomEvents;
 
-  constructor(
-    graph_vm: GraphViewModel,
-    graph_db: GraphDomBuilder,
-    bus: CustomEvents,
-  ) {
+  constructor(graph_vm: GraphViewModel, bus: CustomEvents) {
     this.graph_vm = graph_vm;
-    this.graph_db = graph_db;
+
     this.bus = bus;
 
     this.on_node_position_update();

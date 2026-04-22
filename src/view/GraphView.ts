@@ -18,11 +18,7 @@ export default class GraphView {
     this.graph_vm = new GraphViewModel(graph, this.arrow_vm, bus);
     this.bus = bus;
     this.graph_db = new GraphDomBuilder(container, bus);
-    this.graph_handler = new GraphEventHandler(
-      this.graph_vm,
-      this.graph_db,
-      bus,
-    );
+    this.graph_handler = new GraphEventHandler(this.graph_vm, bus);
     if (Object.keys(graph.nodes).length > 0) {
       this.bus.activate_buttons();
     }

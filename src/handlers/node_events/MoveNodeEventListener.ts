@@ -4,11 +4,11 @@ import type EventHandler from "../../interface/EventHandler";
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 
 export default class MoveNodeEventListener implements EventHandler<Node> {
-  private draggingNode: string | null = null;
+  private dragged_node: string | null = null;
   node_vm: NodeViewModel;
   node_db: MenuDomBuilder;
   bus: CustomEvents;
-  private drawing = false;
+  drawing: boolean;
   constructor(
     node_vm: NodeViewModel,
     node_db: MenuDomBuilder,
@@ -17,6 +17,7 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
     this.node_vm = node_vm;
     this.node_db = node_db;
     this.bus = bus;
+    this.drawing = false;
 
     bus.addEventListener("arrow:drawing:start", () => {
       this.drawing = true;
@@ -24,6 +25,7 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
     bus.addEventListener("arrow:drawing:end", () => {
       this.drawing = false;
     });
+
     this.on_bus_events();
     this.action();
   }
@@ -32,27 +34,27 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
     this.node_db.update_position(node.node);
   };
 
-  private onMouseDown = (event: MouseEvent) => {
+  private on_mouse_down = (event: MouseEvent) => {
     const target = (event.target as HTMLElement).closest(".node");
 
     if (!target) return;
 
-    this.draggingNode = target.id;
+    this.dragged_node = target.id;
   };
 
-  private onMouseMove = (event: MouseEvent) => {
-    if (!this.draggingNode) return;
+  private on_mouse_move = (event: MouseEvent) => {
+    if (!this.dragged_node) return;
 
-    this.node_vm.addMoveEventListener(event, this.draggingNode);
+    this.node_vm.addMoveEventListener(event, this.dragged_node);
   };
 
-  private onMouseUp = () => {
-    this.draggingNode = null;
+  private on_mouse_up = () => {
+    this.dragged_node = null;
   };
   remove_action = () => {
-    document.removeEventListener("mousedown", this.onMouseDown);
-    document.removeEventListener("mousemove", this.onMouseMove);
-    document.removeEventListener("mouseup", this.onMouseUp);
+    document.removeEventListener("mousedown", this.on_mouse_down);
+    document.removeEventListener("mousemove", this.on_mouse_move);
+    document.removeEventListener("mouseup", this.on_mouse_up);
     this.bus.removeEventListener(
       "node:position:update",
       this.on_position_update,
@@ -64,11 +66,11 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
   };
 
   action = () => {
-    document.addEventListener("mousedown", this.onMouseDown);
+    document.addEventListener("mousedown", this.on_mouse_down);
 
-    document.addEventListener("mousemove", this.onMouseMove);
+    document.addEventListener("mousemove", this.on_mouse_move);
 
-    document.addEventListener("mouseup", this.onMouseUp);
+    document.addEventListener("mouseup", this.on_mouse_up);
   };
 
   set_node_coordinates() {}

@@ -3,7 +3,6 @@ import type Module from "../../interface/Module";
 import type Graph from "../../model/Graph";
 import FigureRegistry from "../../registry/FigureRegistry";
 import GraphView from "../../view/GraphView";
-import ButtonViewModel from "../../viewmodel/ButtonViewModel";
 import BFSModule from "./bfs/BFSModule";
 
 export default class AlgorithmModule implements Module {

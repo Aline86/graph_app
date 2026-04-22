@@ -1,11 +1,6 @@
 import type MenuDomBuilder from "../../builders/dom/MenuDomBuilder";
-
 import CustomEvents from "../../events/CustomEvents";
-import type EventHandler from "../../interface/EventHandler";
-import type Node from "../../model/Node";
-
 import FigureRegistry from "../../registry/FigureRegistry";
-
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 
 export default class AddNodeButtonEventListener {
