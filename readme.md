@@ -4,7 +4,7 @@
 
 Ce projet est un éditeur de graphes qui se veut modulaire grâce au câblage de nouveaux algorithmes sans toucher le code centralisé d'édition de graphes. Il est ainsi possible de créer un graphe manuellement et de lancer un algorithme dessus.
 Le projet est en construction, pour le moment le noeud de départ est calculé en fonction de son nombre d'arêtes associées.
-Pour avoir une arrête bidirectionnelle, il s'agit de créer l'arrête aller et l'arrête retour.
+Pour avoir une arrête bidirectionnelle, il s'agit de créer l'arête aller et l'arête retour.
 
 Le graphe s'enregistre dans la session du navigateur.
 
