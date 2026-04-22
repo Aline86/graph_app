@@ -1,4 +1,4 @@
-# Architecture — Graph Editor
+# Architecture — Editeur de graphes
 
 ## Introduction
 

@@ -5,7 +5,6 @@ import ButtonFactory from "./factory/ButtonFactory";
 import PaletteEventHandler from "./handlers/PaletteEventHandler";
 import type Graph from "./model/Graph";
 import AlgorithmModule from "./modules/algorithms/AlgorithmModule";
-
 import ArrowModule from "./modules/ArrowModule";
 import GraphModule from "./modules/GraphModule";
 import NodeModule from "./modules/NodeModule";
@@ -41,18 +40,16 @@ export default class App extends DomUtils {
     NodeModule.register();
     GraphModule.register();
     AlgorithmModule.register();
-    const storage_module = new StorageModule(this.graph);
 
+    const storage_module = new StorageModule(this.graph);
     const graph_module = new GraphModule(this.graph);
     this.button_vm = new ButtonViewModel(this.graph, bus);
-
     ButtonFactory.init(this.button_vm, bus);
-
     this.button_db = new ButtonDomBuilder(this.button_vm, bus);
-
     this.node_menu_view = new NodeMenuView(this.graph, bus);
 
     const palette_db = new PaletteDomBuilder(this.container, bus);
+
     new PaletteEventHandler(
       palette_db,
       this.button_vm,
