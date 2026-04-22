@@ -1,4 +1,3 @@
-import App from "../../App";
 import type CustomEvents from "../../events/CustomEvents";
 import ButtonFactory from "../../factory/ButtonFactory";
 import Button from "../../model/Button";

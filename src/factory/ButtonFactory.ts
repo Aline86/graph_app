@@ -16,7 +16,6 @@ type ButtonStatusValue = (typeof buttonStatus)[ButtonStatusKey];
 export default class ButtonFactory {
   private static button_vm: ButtonViewModel;
   private static bus: CustomEvents;
-  private static actions = FigureRegistry.getAll();
 
   static init(button_vm: ButtonViewModel, bus: CustomEvents): void {
     ButtonFactory.button_vm = button_vm;
