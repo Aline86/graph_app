@@ -1,7 +1,7 @@
 import type AlgorithmEvents from "../../../events/AgorithmEvents";
 import type Graph from "../../../model/Graph";
 
-export default class GraphViewModel {
+export default class BFSViewModel {
   graph: Graph;
 
   public bus: AlgorithmEvents;
