@@ -43,18 +43,18 @@ export default class ButtonFactory {
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
         // cette partie bouton va être améliorée
-
+        ButtonFactory.bus.deactivate_all_actions();
         if ((e.target as HTMLElement)?.id !== undefined) {
           ButtonFactory.button_vm.toggle_state_state(
             (e.target as HTMLElement)?.id,
           );
         }
+
         if (B.state === "activated" || B.id === "add_node") {
           App.activeActionKey = id;
           action(B);
         } else {
           App.activeActionKey = "";
-          ButtonFactory.bus.deactivate_all_actions();
         }
       });
     }

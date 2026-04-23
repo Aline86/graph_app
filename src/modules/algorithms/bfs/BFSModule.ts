@@ -20,6 +20,7 @@ export default class BFSModule implements Module {
     const bfs_db = new BFSDomBuilder(button_vm, container, bus);
     new AddBFSButtonEventListener(container, bfs_db);
   }
+
   install = () => {
     FigureRegistry.register({
       actions_id: GraphView.graph_id,

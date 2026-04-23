@@ -1,4 +1,5 @@
 import type DomBuilder from "../../../builders/dom/DomBuilder";
+import type AlgorithmEvents from "../../../events/AgorithmEvents";
 import type CustomEvents from "../../../events/CustomEvents";
 import Button from "../../../model/Button";
 import type Node from "../../../model/Node";
@@ -10,26 +11,42 @@ import type ButtonViewModel from "../../../viewmodel/ButtonViewModel";
 export default class BFSDomBuilder implements DomBuilder<Button> {
   button_vm: ButtonViewModel;
   container: HTMLElement;
-  bus: CustomEvents;
+  bus: AlgorithmEvents;
   nodes: Node[];
-  actions: FigureAction[];
+  button: Button | null;
+  figure_action: FigureAction | undefined;
   constructor(
     button_vm: ButtonViewModel,
     container: HTMLElement,
-    bus: CustomEvents,
+    bus: AlgorithmEvents,
   ) {
     this.bus = bus;
     this.button_vm = button_vm;
-    this.actions = FigureRegistry.getAll();
+    this.button = null;
     this.container = container;
     this.trigger_wait();
     this.highlight_node();
     this.remove_highlight_node();
     this.nodes = [];
+    this.figure_action = FigureRegistry.get_action_by_id("play_bfs");
+    this.deactivate_all_actions();
   }
 
   update = () => {};
-  delete = () => {};
+  delete = () => {
+    if (!this.button) return;
+
+    const button = document.getElementById(this.button.id);
+    if (!button) return;
+    this.container.appendChild(button);
+
+    if (!button) return;
+    button.removeEventListener("click", () => {
+      if (this.figure_action && this.figure_action !== undefined) {
+        this.figure_action.handler();
+      }
+    });
+  };
   add = (action?: string): void => {
     if (!action) return;
 
@@ -39,19 +56,25 @@ export default class BFSDomBuilder implements DomBuilder<Button> {
       return method.handler();
     }
   };
-
+  deactivate_all_actions = () => {
+    this.bus.addEventListener("deactivate:actions", () => {
+      this.bus.trigger_reinit_graph();
+      this.delete();
+    });
+  };
   action = (element?: Button) => {
     if (!element) return;
-    const button = document.getElementById(element.id);
+    this.button = element;
+    const button = document.getElementById(this.button.id);
     if (!button) return;
     this.container.appendChild(button);
-    const handler = FigureRegistry.get_action_by_id("play_bfs");
 
-    if (handler) {
-      const button = document.getElementById(element.id);
-      if (!button) return;
-      button.addEventListener("click", () => handler.handler(element));
-    }
+    if (!button) return;
+    button.addEventListener("click", () => {
+      if (this.figure_action && this.figure_action !== undefined) {
+        this.figure_action.handler();
+      }
+    });
   };
 
   highlight_node = () => {

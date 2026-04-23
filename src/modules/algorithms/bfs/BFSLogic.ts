@@ -17,14 +17,11 @@ export default class BFSLogic extends DomUtils {
 
   async trigger_bfs() {
     this.trigger = !this.trigger;
-    if (this.trigger) {
-      const map = this.graph.create_hash_map();
-      const start = this.graph.get_most_connected_node();
-      if (!start) return;
-      await this.bfs(map, start);
-    } else {
-      this.bfs_vm.trigger_reinit_graph();
-    }
+
+    const map = this.graph.create_hash_map();
+    const start = this.graph.get_most_connected_node();
+    if (!start) return;
+    await this.bfs(map, start);
   }
   sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
