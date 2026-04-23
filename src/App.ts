@@ -28,7 +28,7 @@ export default class App extends DomUtils {
     const button_container = document.createElement("div");
     button_container.id = "button_container";
     this.container.appendChild(button_container);
-    document.querySelector(container_name)?.appendChild(this.container);
+
     this.graph = graph;
 
     this.button_vm = new ButtonViewModel(this.graph, bus);
