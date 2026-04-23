@@ -58,7 +58,6 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
         for (const action of actions) {
           ButtonFactory.button_vm.change_button_state(action.id, "none");
           ButtonFactory.button_vm.toggle_state_state(action.id);
-          // this.update_button_state(action.id, "active");
         }
     });
   };
