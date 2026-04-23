@@ -33,9 +33,9 @@ export default class PaletteEventHandler {
 
       if (!action) return;
       if (action.id === "button_draw_arrow") {
-        const nodeEl = (e.target as HTMLElement).closest(
+        const nodeEl = e.target as HTMLElement; /*.closest(
           ".node",
-        ) as HTMLElement | null;
+        ) as HTMLElement | null;*/
         if (!nodeEl) return;
 
         const node = this.nodes[nodeEl.id];

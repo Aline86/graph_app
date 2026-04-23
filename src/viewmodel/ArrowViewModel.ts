@@ -22,6 +22,11 @@ export default class ArrowViewModel {
     this.graph.arrows[arrow.id] = arrow;
     return arrow;
   }
+  remove_arrow(target: string) {
+    const arrow = this.graph.arrows[target];
+    delete this.graph.arrows[target];
+    this.bus.trigger_remove_arrow(arrow);
+  }
   add_end_node = (target: Node, arrow: Arrow, x: number, y: number): void => {
     if (
       this.graph.nodes[target.id] !== undefined &&
@@ -37,7 +42,9 @@ export default class ArrowViewModel {
       this.bus.trigger_remove_arrow(arrow);
     }
   };
-
+  is_adequate_target(target: string) {
+    return this.graph.nodes[target] !== undefined;
+  }
   addDrawArrowEventListener = (e: MouseEvent, arrow: Arrow): void => {
     this.draw_arrow(e, arrow);
   };

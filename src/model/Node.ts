@@ -30,8 +30,16 @@ export default class Node {
   };
 
   move_node = (e: MouseEvent) => {
-    this.position.x = e.clientX - this.get_center();
-    this.position.y = e.clientY - this.get_center();
+    if (0 >= e.clientY) {
+      this.position.y = 0;
+    } else {
+      this.position.y = e.clientY - this.get_center();
+    }
+    if (0 >= e.clientX) {
+      this.position.x = 0;
+    } else {
+      this.position.x = e.clientX - this.get_center();
+    }
   };
 
   set_position(e: PositionInit) {

@@ -36,13 +36,16 @@ export default class ArrowEventHandler extends DomUtils {
   }
 
   detect_click = (node?: Node) => {
-    if (!node) return;
+    if (!node || !this.arrow_vm.is_adequate_target(node.id)) return;
     this.state.status === "still"
       ? this.start_drawing(node)
       : this.finish_drawing(node);
   };
   deactivate_all_actions = () => {
     this.bus.addEventListener("deactivate:actions", () => {
+      if (this.state.arrow) {
+        this.arrow_vm.remove_arrow(this.state.arrow.id);
+      }
       if (this.state.handler) {
         document.removeEventListener("mousemove", this.state.handler);
       }

@@ -21,6 +21,9 @@ export default class ButtonViewModel {
       button.set_state(state);
     }
   };
+  is_adequate_target_for_arrow(target: string) {
+    return this.graph.nodes[target] !== undefined;
+  }
   toggle_state_state = (id: string) => {
     const button = Button.get(id);
     if (button) {
