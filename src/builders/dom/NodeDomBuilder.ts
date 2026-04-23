@@ -91,6 +91,7 @@ export default class NodeDomBuilder
         this.add_node.bind(this),
         this.container.id,
         "active",
+        false,
       );
     }
   };

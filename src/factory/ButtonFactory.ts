@@ -29,6 +29,7 @@ export default class ButtonFactory {
     action: (button?: Button) => void,
     container: string,
     status: string,
+    toggleable: boolean = true,
   ) {
     const bus = ButtonFactory.bus;
     const button_vm = ButtonFactory.button_vm;
@@ -51,7 +52,7 @@ export default class ButtonFactory {
           button_vm.toggle_state_state((e.target as HTMLElement)?.id);
         }
 
-        if (B.state === "activated" || B.id === "add_node") {
+        if (B.state === "activated" || !toggleable) {
           bus.active_action_key = id;
           action(B);
         } else {
