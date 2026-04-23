@@ -1,6 +1,5 @@
 import type DomBuilder from "../../../builders/dom/DomBuilder";
 import type AlgorithmEvents from "../../../events/AgorithmEvents";
-import type CustomEvents from "../../../events/CustomEvents";
 import Button from "../../../model/Button";
 import type Node from "../../../model/Node";
 import FigureRegistry, {
