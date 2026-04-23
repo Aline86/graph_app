@@ -33,7 +33,7 @@ export default class App extends DomUtils {
 
     this.button_vm = new ButtonViewModel(this.graph, bus);
     ButtonFactory.init(this.button_vm, bus);
-    StorageModule.clear();
+    //StorageModule.clear();
     this.container.className = "graph";
 
     const storage_module = new StorageModule(this.graph);
