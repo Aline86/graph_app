@@ -2,7 +2,7 @@ export default class Button {
   id: string;
   state: string;
   static buttons: Button[] = [];
-  static Button: Map<string, Button>;
+
   constructor(id: string) {
     this.id = id;
     this.state = "unvisible";
