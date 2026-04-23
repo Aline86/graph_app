@@ -11,7 +11,7 @@ import NodeMenuView from "./view/NodeMenuView";
 import ButtonViewModel from "./viewmodel/ButtonViewModel";
 
 export default class App {
-  static activeActionKey: string | null = null;
+  static active_action_key: string | null = null;
   container: HTMLElement;
   graph: Graph;
   button_vm: ButtonViewModel;
@@ -24,6 +24,7 @@ export default class App {
     this.graph = graph;
     this.container = this.create_container(container_name);
     this.button_vm = new ButtonViewModel(this.graph, bus);
+
     ButtonFactory.init(this.button_vm, bus);
     //StorageModule.clear();
 

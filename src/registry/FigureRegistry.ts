@@ -2,7 +2,9 @@ export type FigureAction<T = any> = {
   actions_id: string;
   id: string;
   name: string;
+  class_name: string;
   action: string;
+  mode: string;
   handler: (element?: T) => void;
 };
 

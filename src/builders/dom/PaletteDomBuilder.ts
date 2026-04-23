@@ -35,8 +35,10 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
           action.action,
           action.name,
           action.id,
+          action.class_name,
           action.handler,
           "button_container",
+          action.mode,
         );
       }
   };

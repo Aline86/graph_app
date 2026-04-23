@@ -1,4 +1,3 @@
-import App from "../App";
 import type PaletteDomBuilder from "../builders/dom/PaletteDomBuilder";
 import type CustomEvents from "../events/CustomEvents";
 import type Node from "../model/Node";
@@ -29,10 +28,11 @@ export default class PaletteEventHandler {
 
   activate_palette_actions = () => {
     this.container?.addEventListener("click", (e: MouseEvent) => {
-      const action = App.get_active_action();
+      const action = this.bus.get_active_action();
 
       if (!action) return;
-      if (action.id === "button_draw_arrow") {
+      // none action palette hidden by default if no node => none targets all palette actions
+      if (action.mode === "none") {
         const nodeEl = (e.target as HTMLElement).closest(
           ".node",
         ) as HTMLElement | null;

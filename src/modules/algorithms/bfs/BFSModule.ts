@@ -7,15 +7,18 @@ import AddBFSButtonEventListener from "./AddBFSButtonEventListener";
 import BFSDomBuilder from "./BFSDomBuilder";
 import type AlgorithmEvents from "../../../events/AgorithmEvents";
 import BFSLogic from "./BFSLogic";
-import GraphView from "../../../view/GraphView";
 
 export default class BFSModule implements Module {
   graph: Graph;
   bfs_logic: BFSLogic;
+  container: HTMLElement;
   constructor(graph: Graph, bus: AlgorithmEvents, container: HTMLElement) {
     this.graph = graph;
+    this.container = container;
     this.install();
+
     this.bfs_logic = new BFSLogic(graph, bus);
+
     const button_vm = new ButtonViewModel(this.graph, bus);
     const bfs_db = new BFSDomBuilder(button_vm, container, bus);
     new AddBFSButtonEventListener(container, bfs_db);
@@ -23,10 +26,13 @@ export default class BFSModule implements Module {
 
   install = () => {
     FigureRegistry.register({
-      actions_id: GraphView.graph_id,
+      actions_id: "play_bfs",
       name: "Play BFS",
+      id: this.container.id + "_" + "play_bfs",
+      class_name: "play_bfs",
       action: "click",
-      id: "play_bfs",
+
+      mode: "active",
       handler: this.run,
     });
   };

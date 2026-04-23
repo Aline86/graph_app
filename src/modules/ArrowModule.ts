@@ -17,10 +17,13 @@ export default class ArrowModule implements Module {
 
     FigureRegistry.register({
       actions_id: "palette",
-      id: "button_draw_arrow",
+      id: container.id + "_" + "button_draw_arrow",
+      class_name: "button_draw_arrow",
       name: "dessiner les flèches",
       action: "click",
+
       handler: arrow_view.arrow_handler.detect_click,
+      mode: "none",
     });
   }
 }

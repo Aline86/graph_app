@@ -1,15 +1,7 @@
-import App from "../App";
 import type Arrow from "../model/Arrow";
 import type Node from "../model/Node";
-import type { FigureAction } from "../registry/FigureRegistry";
-import FigureRegistry from "../registry/FigureRegistry";
 
 export default class DomUtils {
-  static get_active_action(): FigureAction | null {
-    return (
-      FigureRegistry.getAll().find((a) => a.id === App.activeActionKey) ?? null
-    );
-  }
   get_target_position = (target: string) => {
     const el = document.getElementById(target);
     if (el) {

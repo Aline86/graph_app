@@ -24,14 +24,6 @@ export default class ArrowEventHandler extends DomUtils {
     this.container = container;
     this.bus = bus;
 
-    FigureRegistry.register({
-      actions_id: ArrowView.actions_id,
-      id: "button_draw_arrow",
-      name: "dessiner les flèches",
-      action: "click",
-      handler: this.detect_click,
-    });
-
     this.deactivate_all_actions();
   }
 

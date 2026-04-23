@@ -23,8 +23,10 @@ export default class GraphModule implements Module {
     FigureRegistry.register({
       actions_id: "menu_node",
       name: "Supprimer le noeud",
+      class_name: "remove_node",
       action: "click",
-      id: "remove_node",
+      id: container.id + "_" + "remove_node",
+      mode: "active",
       handler: graph.graph_handler.remove_node,
     });
 

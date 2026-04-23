@@ -19,25 +19,22 @@ export default class NodeModule implements Module {
     FigureRegistry.register({
       actions_id: "menu_node",
       name: "renommer le noeud",
+      class_name: "button_rename_node",
       action: "click",
-      id: "button_rename_node",
+      id: container.id + "_button_rename_node",
+      mode: "active",
       handler: node_view.handler.rename_listener.action,
     });
     FigureRegistry.register({
       actions_id: NodeView.node_id,
       name: "Bouger le noeud",
+      class_name: "update_position",
       action: "click",
-      id: "update_position",
+      id: container.id + "_update_position",
+      mode: "active",
       handler: node_view.node_db.add_node_button,
     });
-    FigureRegistry.register({
-      actions_id: NodeView.node_id,
-      id: "add_node",
-      name: "Ajouter un noeud",
-      action: "click",
 
-      handler: node_view.node_db.add_node,
-    });
     node_view.node_db.add_node_button();
   }
 }

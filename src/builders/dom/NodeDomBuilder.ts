@@ -86,6 +86,7 @@ export default class NodeDomBuilder
       ButtonFactory.create_button(
         "click",
         "Ajouter un noeud",
+        this.container.id + "_add_node",
         "add_node",
         this.add_node.bind(this),
         this.container.id,

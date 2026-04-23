@@ -1,4 +1,3 @@
-import App from "../App";
 import type CustomEvents from "../events/CustomEvents";
 import type Button from "../model/Button";
 import type ButtonViewModel from "../viewmodel/ButtonViewModel";
@@ -6,7 +5,7 @@ import type ButtonViewModel from "../viewmodel/ButtonViewModel";
 const buttonStatus = {
   unvisible: "none",
   active: "active",
-  inactive: "inactive",
+  activated: "activated",
 } as const;
 
 type ButtonStatusKey = keyof typeof buttonStatus;
@@ -25,21 +24,22 @@ export default class ButtonFactory {
     trigger_action: string,
     label: string,
     id: string,
+    class_name: string,
     action: (button?: Button) => void,
     container: string,
-    status: string = "unvisible",
+    status: string,
   ) {
     const button = document.createElement("button");
     button.innerHTML = label;
     button.id = id;
     const s: ButtonStatusValue =
       buttonStatus[status as ButtonStatusKey] ?? "none";
-    button.className = s;
-
+    button.className = class_name + " " + s;
     const B = ButtonFactory.button_vm.create_button(id);
     ButtonFactory.button_vm.change_button_state(B.id, status);
 
     document.getElementById(container)?.appendChild(button);
+
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
         // cette partie bouton va être améliorée
@@ -51,10 +51,10 @@ export default class ButtonFactory {
         }
 
         if (B.state === "activated" || B.id === "add_node") {
-          App.activeActionKey = id;
+          ButtonFactory.bus.active_action_key = id;
           action(B);
         } else {
-          App.activeActionKey = "";
+          ButtonFactory.bus.active_action_key = null;
         }
       });
     }

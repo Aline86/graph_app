@@ -1,11 +1,24 @@
 import type Arrow from "../model/Arrow";
 import type Button from "../model/Button";
 import type Node from "../model/Node";
+import FigureRegistry from "../registry/FigureRegistry";
 
 export default class CustomEvents extends EventTarget {
+  // Je sais que ça mélange les responsabilités mais le bus est partagé et c'st la seule fonction d'état globale de l'app
+  // j'extrairait cet attribut plus tard
+  public active_action_key: string | null = null;
+
   constructor() {
     super();
   }
+
+  get_active_action = () => {
+    return (
+      FigureRegistry.getAll().find((a) => a.id === this.active_action_key) ??
+      null
+    );
+  };
+
   deactivate_all_actions() {
     let event = new CustomEvent("deactivate:actions", {});
 

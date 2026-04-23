@@ -14,16 +14,21 @@ export default class AddBFSButtonEventListener {
 
   remove_action = () => {};
   add_node_button = (): void => {
-    const action = FigureRegistry.get_action_by_id("play_bfs");
-    if (this.container && action) {
-      ButtonFactory.create_button(
-        "click",
-        "algorithme BFS",
-        "play_bfs",
-        action.handler.bind(this),
-        this.container.id,
-        "active",
-      );
+    const actions = FigureRegistry.get("play_bfs");
+
+    if (this.container && actions) {
+      for (const key in actions) {
+        const action = actions[key];
+        ButtonFactory.create_button(
+          action.action,
+          action.name,
+          action.id,
+          action.class_name,
+          action.handler,
+          this.container.id,
+          action.mode,
+        );
+      }
     }
   };
 }
