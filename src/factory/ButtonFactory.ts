@@ -13,7 +13,7 @@ type ButtonStatusKey = keyof typeof buttonStatus;
 type ButtonStatusValue = (typeof buttonStatus)[ButtonStatusKey];
 
 export default class ButtonFactory {
-  private static button_vm: ButtonViewModel;
+  public static button_vm: ButtonViewModel;
   private static bus: CustomEvents;
 
   static init(button_vm: ButtonViewModel, bus: CustomEvents): void {
@@ -42,13 +42,19 @@ export default class ButtonFactory {
     document.getElementById(container)?.appendChild(button);
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
-        App.activeActionKey = id;
-        action(B);
-        ButtonFactory.bus.deactivate_all_actions();
+        // cette partie bouton va être améliorée
+        console.log("B", B);
         if ((e.target as HTMLElement)?.id !== undefined) {
           ButtonFactory.button_vm.toggle_state_state(
             (e.target as HTMLElement)?.id,
           );
+        }
+        if (B.state === "activated" || B.id === "add_node") {
+          App.activeActionKey = id;
+          action(B);
+        } else {
+          App.activeActionKey = "";
+          ButtonFactory.bus.deactivate_all_actions();
         }
       });
     }

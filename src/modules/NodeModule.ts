@@ -17,7 +17,7 @@ export default class NodeModule implements Module {
     new MenuDomBuilder(container, bus);
     const node_view = new NodeView(container, node_vm, bus);
     FigureRegistry.register({
-      actions_id: NodeView.node_id,
+      actions_id: "menu_node",
       name: "renommer le noeud",
       action: "click",
       id: "button_rename_node",
@@ -38,5 +38,6 @@ export default class NodeModule implements Module {
 
       handler: node_view.node_db.add_node,
     });
+    node_view.node_db.add_node_button();
   }
 }

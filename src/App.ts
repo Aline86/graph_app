@@ -33,18 +33,24 @@ export default class App extends DomUtils {
     document.querySelector(container_name)?.appendChild(this.container);
     this.graph = graph;
 
+    this.button_vm = new ButtonViewModel(this.graph, bus);
+    ButtonFactory.init(this.button_vm, bus);
     //StorageModule.clear();
     this.container.className = "graph";
 
     const storage_module = new StorageModule(this.graph);
+
+    storage_module.install(bus);
+
     const graph_module = new GraphModule(this.graph);
-    this.button_vm = new ButtonViewModel(this.graph, bus);
-    ButtonFactory.init(this.button_vm, bus);
+
+    graph_module.install(bus, this.container);
+
+    const algorithm_module = new AlgorithmModule(this.graph);
+    algorithm_module.install(bus, this.container);
     this.button_db = new ButtonDomBuilder(this.button_vm, bus);
     this.node_menu_view = new NodeMenuView(this.graph, bus);
-
-    const palette_db = new PaletteDomBuilder(this.container, bus);
-
+    const palette_db = new PaletteDomBuilder(this.container, bus, this.graph);
     new PaletteEventHandler(
       palette_db,
       this.button_vm,
@@ -52,11 +58,5 @@ export default class App extends DomUtils {
       this.graph.nodes,
       bus,
     );
-
-    storage_module.install(bus);
-    graph_module.install(bus, this.container);
-
-    const algorithm_module = new AlgorithmModule(this.graph);
-    algorithm_module.install(bus, this.container);
   }
 }

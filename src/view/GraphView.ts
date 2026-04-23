@@ -12,16 +12,14 @@ export default class GraphView {
   graph_db: GraphDomBuilder;
   graph_handler: GraphEventHandler;
   bus: CustomEvents;
-
+  graph: Graph;
   constructor(container: HTMLElement, graph: Graph, bus: CustomEvents) {
     this.arrow_vm = new ArrowViewModel(graph, bus);
     this.graph_vm = new GraphViewModel(graph, this.arrow_vm, bus);
     this.bus = bus;
+    this.graph = graph;
     this.graph_db = new GraphDomBuilder(container, bus);
     this.graph_handler = new GraphEventHandler(this.graph_vm, bus);
-    if (Object.keys(graph.nodes).length > 0) {
-      this.bus.activate_buttons();
-    }
   }
 
   load_graph = () => {

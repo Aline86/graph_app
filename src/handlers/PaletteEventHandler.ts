@@ -30,7 +30,7 @@ export default class PaletteEventHandler {
   activate_palette_actions = () => {
     this.container?.addEventListener("click", (e: MouseEvent) => {
       const action = App.get_active_action();
-      console.log("action", action);
+
       if (!action) return;
       if (action.id === "button_draw_arrow") {
         const nodeEl = (e.target as HTMLElement).closest(

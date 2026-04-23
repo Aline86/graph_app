@@ -18,14 +18,11 @@ export default class FigureRegistry {
       FigureRegistry.actions.set(action.actions_id, [action]);
     }
   }
-  static update_handler(id: string, handler: () => void) {
-    const figure = FigureRegistry.get_action_by_id(id);
-    if (figure) {
-      figure.handler = handler;
-    }
-  }
+
   static get(id: string): FigureAction[] | undefined {
-    return FigureRegistry.actions.get(id);
+    const existing = FigureRegistry.actions.get(id);
+    console.log("existing", existing);
+    return existing;
   }
   static getAll(): FigureAction[] {
     return Array.from(FigureRegistry.actions.values()).flat();

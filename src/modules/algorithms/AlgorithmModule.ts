@@ -14,13 +14,5 @@ export default class AlgorithmModule implements Module {
 
   install(bus: AlgorithmEvents, container: HTMLElement) {
     const bfs_module = new BFSModule(this.graph, bus, container);
-
-    FigureRegistry.register({
-      actions_id: GraphView.graph_id,
-      name: "Play BFS",
-      action: "click",
-      id: "play_bfs",
-      handler: bfs_module.run,
-    });
   }
 }

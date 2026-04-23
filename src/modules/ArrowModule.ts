@@ -16,7 +16,7 @@ export default class ArrowModule implements Module {
     const arrow_view = new ArrowView(container, arrow_vm, bus);
 
     FigureRegistry.register({
-      actions_id: ArrowView.actions_id,
+      actions_id: "palette",
       id: "button_draw_arrow",
       name: "dessiner les flèches",
       action: "click",

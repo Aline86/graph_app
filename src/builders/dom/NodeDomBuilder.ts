@@ -24,16 +24,7 @@ export default class NodeDomBuilder
     super();
     this.node_vm = node_vm;
     this.actions = [];
-    const rename_node = FigureRegistry.get_action_by_id("button_rename_node");
 
-    if (rename_node !== undefined) {
-      this.actions.push(rename_node);
-    }
-    const delete_node = FigureRegistry.get_action_by_id("remove_node");
-
-    if (delete_node !== undefined) {
-      this.actions.push(delete_node);
-    }
     this.bus = bus;
     this.container = container;
     this.on_load_node();
@@ -103,9 +94,9 @@ export default class NodeDomBuilder
     }
   };
   create_node_buttons(node_id: string): void {
-    if (!this.actions) return;
-
-    for (const action of this.actions) {
+    const actions = FigureRegistry.get("menu_node");
+    if (!actions) return;
+    for (const action of actions) {
       this.create_button_on_node(node_id, action);
     }
   }
