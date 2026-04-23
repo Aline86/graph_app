@@ -43,7 +43,7 @@ export default class ButtonFactory {
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
         // cette partie bouton va être améliorée
-        console.log("B", B);
+
         if ((e.target as HTMLElement)?.id !== undefined) {
           ButtonFactory.button_vm.toggle_state_state(
             (e.target as HTMLElement)?.id,

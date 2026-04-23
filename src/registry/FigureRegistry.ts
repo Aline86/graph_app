@@ -21,7 +21,7 @@ export default class FigureRegistry {
 
   static get(id: string): FigureAction[] | undefined {
     const existing = FigureRegistry.actions.get(id);
-    console.log("existing", existing);
+
     return existing;
   }
   static getAll(): FigureAction[] {

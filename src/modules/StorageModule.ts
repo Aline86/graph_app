@@ -9,7 +9,6 @@ export default class StorageModule implements Module {
   }
 
   install(bus: CustomEvents) {
-    console.log("inside");
     bus.addEventListener("add:node", () => this.save());
     bus.addEventListener("node:position:update", () => this.save());
     bus.addEventListener("rename:node", () => this.save());
