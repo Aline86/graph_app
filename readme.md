@@ -86,6 +86,14 @@ GraphAlgorithmModule
   └── VotreNouveauModule
 ```
 
-## Limitation actuelle
+## Limitations actuelles vouées à modications futures
 
 Par manque de temps la gestion des boutons n'est pas optimale. C'est le point faible du projet et cette thématique fera l'objet d'une refacto très prochainement
+
+Le register statique qui ne permettent pas de debugger facilement, il faudrait que j'initialise le FigureRegistry à l'installation des modules après instanciation des différentes classes nécessaires au module.
+
+Pareil pour le button factory
+
+Gérer mieux l'ordre d'inialisation dans App
+
+Ecrire des tests
