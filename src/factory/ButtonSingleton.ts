@@ -46,13 +46,12 @@ export default class ButtonSingleton {
 
     if (trigger_action !== "") {
       button.addEventListener(trigger_action, (e) => {
-        // cette partie bouton va être améliorée
         bus.deactivate_all_actions();
         if ((e.target as HTMLElement)?.id !== undefined) {
           button_vm.toggle_state_state((e.target as HTMLElement)?.id);
         }
 
-        if (B.state === "activated" || toggleable) {
+        if (B.state === "activated" || !toggleable) {
           bus.active_action_key = id;
           action(B);
         } else {
