@@ -52,7 +52,7 @@ export default class ButtonSingleton {
           button_vm.toggle_state_state((e.target as HTMLElement)?.id);
         }
 
-        if (B.state === "activated" || !toggleable) {
+        if (B.state === "activated" || toggleable) {
           bus.active_action_key = id;
           action(B);
         } else {
