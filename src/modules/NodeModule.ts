@@ -45,10 +45,6 @@ export default class NodeModule implements Module {
       "button_rename_node",
       node_view.handler.rename_listener.action,
     );
-    FigureRegistry.update_handler(
-      "add_node",
-      node_view.handler.move_listener.action,
-    );
     FigureRegistry.update_handler("add_node", node_view.node_db.add_node);
     node_view.node_db.add_node_button();
   }
