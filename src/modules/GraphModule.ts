@@ -19,22 +19,20 @@ export default class GraphModule implements Module {
     }
   }
 
-  static register() {
-    FigureRegistry.register({
-      actions_id: NodeView.node_id,
-      name: "Supprimer le noeud",
-      action: "click",
-      id: "remove_node",
-      handler: () => {},
-    });
-  }
-
   install(bus: CustomEvents, container: HTMLElement) {
     const graph = new GraphView(container, this.graph, bus);
     const arrow_module = new ArrowModule(this.graph);
     arrow_module.install(bus, container);
     const node_module = new NodeModule(this.graph);
     node_module.install(bus, container);
+
+    FigureRegistry.register({
+      actions_id: NodeView.node_id,
+      name: "Supprimer le noeud",
+      action: "click",
+      id: "remove_node",
+      handler: graph.graph_handler.remove_node,
+    });
     graph.load_graph();
   }
 }

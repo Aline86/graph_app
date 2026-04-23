@@ -11,20 +11,24 @@ export default class NodeModule implements Module {
   constructor(graph: Graph) {
     this.graph = graph;
   }
-  static register() {
+
+  install(bus: CustomEvents, container: HTMLElement) {
+    const node_vm = new NodeViewModel(this.graph, bus);
+    new MenuDomBuilder(container, bus);
+    const node_view = new NodeView(container, node_vm, bus);
     FigureRegistry.register({
       actions_id: NodeView.node_id,
       name: "renommer le noeud",
       action: "click",
       id: "button_rename_node",
-      handler: () => {},
+      handler: node_view.handler.rename_listener.action,
     });
     FigureRegistry.register({
       actions_id: NodeView.node_id,
       name: "Bouger le noeud",
       action: "click",
       id: "update_position",
-      handler: () => {},
+      handler: node_view.node_db.add_node_button,
     });
     FigureRegistry.register({
       actions_id: NodeView.node_id,
@@ -32,20 +36,7 @@ export default class NodeModule implements Module {
       name: "Ajouter un noeud",
       action: "click",
 
-      handler: () => {},
+      handler: node_view.node_db.add_node,
     });
-  }
-
-  install(bus: CustomEvents, container: HTMLElement) {
-    const node_vm = new NodeViewModel(this.graph, bus);
-    new MenuDomBuilder(container, bus);
-    const node_view = new NodeView(container, node_vm, bus);
-
-    FigureRegistry.update_handler(
-      "button_rename_node",
-      node_view.handler.rename_listener.action,
-    );
-    FigureRegistry.update_handler("add_node", node_view.node_db.add_node);
-    node_view.node_db.add_node_button();
   }
 }

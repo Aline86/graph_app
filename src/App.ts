@@ -36,11 +36,6 @@ export default class App extends DomUtils {
     //StorageModule.clear();
     this.container.className = "graph";
 
-    ArrowModule.register();
-    NodeModule.register();
-    GraphModule.register();
-    AlgorithmModule.register();
-
     const storage_module = new StorageModule(this.graph);
     const graph_module = new GraphModule(this.graph);
     this.button_vm = new ButtonViewModel(this.graph, bus);
