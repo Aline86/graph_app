@@ -2,9 +2,7 @@ import type CustomEvents from "../events/CustomEvents";
 import type Arrow from "../model/Arrow";
 import type Node from "../model/Node";
 import Position from "../model/Position";
-import FigureRegistry from "../registry/FigureRegistry";
 import DomUtils from "../utils/DomUtils";
-import ArrowView from "../view/ArrowView";
 import type ArrowViewModel from "../viewmodel/ArrowViewModel";
 
 type ArrowState = {
