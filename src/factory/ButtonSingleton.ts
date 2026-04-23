@@ -11,14 +11,14 @@ const buttonStatus = {
 type ButtonStatusKey = keyof typeof buttonStatus;
 type ButtonStatusValue = (typeof buttonStatus)[ButtonStatusKey];
 
-export default class ButtonFactory {
+export default class ButtonSingleton {
   public static button_vm: ButtonViewModel;
 
   private static bus: CustomEvents;
 
   static init(button_vm: ButtonViewModel, bus: CustomEvents): void {
-    ButtonFactory.button_vm = button_vm;
-    ButtonFactory.bus = bus;
+    ButtonSingleton.button_vm = button_vm;
+    ButtonSingleton.bus = bus;
   }
 
   static create_button(
@@ -31,8 +31,8 @@ export default class ButtonFactory {
     status: string,
     toggleable: boolean = true,
   ) {
-    const bus = ButtonFactory.bus;
-    const button_vm = ButtonFactory.button_vm;
+    const bus = ButtonSingleton.bus;
+    const button_vm = ButtonSingleton.button_vm;
     const button = document.createElement("button");
     button.innerHTML = label;
     button.id = id;

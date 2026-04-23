@@ -1,4 +1,4 @@
-import ButtonFactory from "../../../factory/ButtonFactory";
+import ButtonSingleton from "../../../factory/ButtonSingleton";
 import FigureRegistry from "../../../registry/FigureRegistry";
 
 import type BFSDomBuilder from "./BFSDomBuilder";
@@ -19,7 +19,7 @@ export default class AddBFSButtonEventListener {
     if (this.container && actions) {
       for (const key in actions) {
         const action = actions[key];
-        ButtonFactory.create_button(
+        ButtonSingleton.create_button(
           action.action,
           action.name,
           action.id,

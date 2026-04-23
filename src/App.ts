@@ -1,7 +1,7 @@
 import ButtonDomBuilder from "./builders/dom/ButtonDomBuilder";
 import PaletteDomBuilder from "./builders/dom/PaletteDomBuilder";
 import type AlgorithmEvents from "./events/AgorithmEvents";
-import ButtonFactory from "./factory/ButtonFactory";
+import ButtonSingleton from "./factory/ButtonSingleton";
 import PaletteEventHandler from "./handlers/PaletteEventHandler";
 import type Graph from "./model/Graph";
 import AlgorithmModule from "./modules/algorithms/AlgorithmModule";
@@ -25,7 +25,7 @@ export default class App {
     this.container = this.create_container(container_name);
     this.button_vm = new ButtonViewModel(this.graph, bus);
 
-    ButtonFactory.init(this.button_vm, bus);
+    ButtonSingleton.init(this.button_vm, bus);
     //StorageModule.clear();
 
     const storage_module = new StorageModule(this.graph);

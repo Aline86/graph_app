@@ -1,5 +1,5 @@
 import type CustomEvents from "../../events/CustomEvents";
-import ButtonFactory from "../../factory/ButtonFactory";
+import ButtonSingleton from "../../factory/ButtonSingleton";
 import Button from "../../model/Button";
 import type Graph from "../../model/Graph";
 import type { FigureAction } from "../../registry/FigureRegistry";
@@ -31,7 +31,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
 
     if (actions)
       for (const action of actions) {
-        ButtonFactory.create_button(
+        ButtonSingleton.create_button(
           action.action,
           action.name,
           action.id,
@@ -58,8 +58,8 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
 
       if (actions)
         for (const action of actions) {
-          ButtonFactory.button_vm.change_button_state(action.id, "none");
-          ButtonFactory.button_vm.toggle_state_state(action.id);
+          ButtonSingleton.button_vm.change_button_state(action.id, "none");
+          ButtonSingleton.button_vm.toggle_state_state(action.id);
         }
     });
   };

@@ -1,5 +1,5 @@
 import type CustomEvents from "../../events/CustomEvents";
-import ButtonFactory from "../../factory/ButtonFactory";
+import ButtonSingleton from "../../factory/ButtonSingleton";
 import type Node from "../../model/Node";
 import type { FigureAction } from "../../registry/FigureRegistry";
 import FigureRegistry from "../../registry/FigureRegistry";
@@ -83,7 +83,7 @@ export default class NodeDomBuilder
   };
   add_node_button = (): void => {
     if (this.container) {
-      ButtonFactory.create_button(
+      ButtonSingleton.create_button(
         "click",
         "Ajouter un noeud",
         this.container.id + "_add_node",
