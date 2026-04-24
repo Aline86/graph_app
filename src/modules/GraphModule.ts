@@ -14,6 +14,11 @@ export default class GraphModule implements Module {
 
   install(bus: CustomEvents, container: HTMLElement) {
     const graph = new GraphView(container, this.graph, bus);
+
+    const arrow_module = new ArrowModule(this.graph);
+    arrow_module.install(bus, container);
+    const node_module = new NodeModule(this.graph);
+    node_module.install(bus, container);
     FigureRegistry.register({
       actions_id: container.id + "_menu_node",
       name: "Supprimer le noeud",
@@ -24,11 +29,6 @@ export default class GraphModule implements Module {
       handler: graph.graph_handler.remove_node,
     });
 
-    const arrow_module = new ArrowModule(this.graph);
-    arrow_module.install(bus, container);
-
-    const node_module = new NodeModule(this.graph);
-    node_module.install(bus, container);
     graph.load_graph();
   }
 }
