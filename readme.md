@@ -56,14 +56,7 @@ Les modules existants reçoivent `CustomEvents` en paramètre — ils acceptent 
 
 ## Le FigureRegistry
 
-Registre statique qui mappe des identifiants d'actions à des handlers. Les ids sont des identifiants de **catégorie** (`node_events`, `arrow_events`), pas d'instances DOM.
-
-Il est nécessaire d'appeler `register()` avant `install()`.
-
-```ts
-GraphModule.register(); // enregistre les actions avec handlers vides
-graph_module.install(); // câble les vrais handlers
-```
+Registre statique qui mappe des identifiants d'actions à des handlers. Les ids sont des identifiants de **catégorie** (`node_events`, `arrow_events`), pas d'instances DOM lié à l'instance.
 
 ---
 
