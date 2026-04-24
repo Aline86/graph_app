@@ -6,7 +6,7 @@ import PaletteEventHandler from "./handlers/PaletteEventHandler";
 import type Graph from "./model/Graph";
 import AlgorithmModule from "./modules/algorithms/AlgorithmModule";
 import GraphModule from "./modules/GraphModule";
-import type StorageModule from "./modules/StorageModule";
+import type Storage from "./modules/Storage";
 import NodeMenuView from "./view/NodeMenuView";
 import ButtonViewModel from "./viewmodel/ButtonViewModel";
 
@@ -19,18 +19,19 @@ export default class App {
     graph: Graph,
     container_name: string,
     bus: AlgorithmEvents,
-    storage: StorageModule,
+    storage: Storage,
   ) {
     this.graph = graph;
     this.container = this.create_container(container_name);
     this.button_vm = new ButtonViewModel(this.graph, bus);
 
     ButtonSingleton.init(this.button_vm, bus);
-    //StorageModule.clear();
+
     this.load_modules(bus);
     // call after modules so all button functionnalities are registered in core module
-    this.load_palette_and_node_menu(bus);
     storage.install();
+
+    this.load_palette_and_node_menu(bus);
   }
 
   private load_modules(bus: AlgorithmEvents) {

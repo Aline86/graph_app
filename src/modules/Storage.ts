@@ -1,15 +1,16 @@
 import type CustomEvents from "../events/CustomEvents";
-import type Module from "../interface/Module";
 import type Graph from "../model/Graph";
 import FigureRegistry from "../registry/FigureRegistry";
 
-export default class StorageModule implements Module {
+export default class Storage {
   graph: Graph;
   bus: CustomEvents;
   constructor(graph: Graph, bus: CustomEvents) {
     this.graph = graph;
     this.bus = bus;
+  }
 
+  install() {
     FigureRegistry.register({
       actions_id: this.graph.id + "_palette",
       id: this.graph.id + "_" + "clear",
@@ -20,9 +21,6 @@ export default class StorageModule implements Module {
       handler: this.clear,
       mode: "none",
     });
-  }
-
-  install() {
     this.bus.addEventListener("add:node", () => this.save());
     this.bus.addEventListener("node:position:update", () => this.save());
     this.bus.addEventListener("rename:node", () => this.save());
