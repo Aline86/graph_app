@@ -1,7 +1,7 @@
 import ButtonDomBuilder from "./builders/dom/ButtonDomBuilder";
 import PaletteDomBuilder from "./builders/dom/PaletteDomBuilder";
 import type AlgorithmEvents from "./events/AgorithmEvents";
-import ButtonSingleton from "./factory/ButtonSingleton";
+import ButtonSingleton from "./singleton/ButtonSingleton";
 import PaletteEventHandler from "./handlers/PaletteEventHandler";
 import type Graph from "./model/Graph";
 import AlgorithmModule from "./modules/algorithms/AlgorithmModule";

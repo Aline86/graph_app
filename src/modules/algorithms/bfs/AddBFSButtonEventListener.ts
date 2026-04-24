@@ -1,4 +1,4 @@
-import ButtonSingleton from "../../../factory/ButtonSingleton";
+import ButtonSingleton from "../../../singleton/ButtonSingleton";
 import FigureRegistry from "../../../registry/FigureRegistry";
 
 import type BFSDomBuilder from "./BFSDomBuilder";

@@ -1,5 +1,5 @@
 import type CustomEvents from "../../events/CustomEvents";
-import ButtonSingleton from "../../factory/ButtonSingleton";
+import ButtonSingleton from "../../singleton/ButtonSingleton";
 import type Node from "../../model/Node";
 import type { FigureAction } from "../../registry/FigureRegistry";
 import FigureRegistry from "../../registry/FigureRegistry";

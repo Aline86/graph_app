@@ -90,7 +90,7 @@ GraphAlgorithmModule
 
 Par manque de temps la gestion des boutons n'est pas optimale. C'est le point faible du projet et cette thématique fera l'objet d'une refacto très prochainement
 
-Pareil pour le button factory
+Pareil pour le button singleton
 
 Gérer mieux l'ordre d'inialisation dans App
 
