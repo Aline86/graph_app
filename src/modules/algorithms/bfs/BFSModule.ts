@@ -32,7 +32,7 @@ export default class BFSModule implements Module {
       class_name: "play_bfs",
       action: "click",
 
-      mode: "active",
+      mode: "none",
       handler: this.run,
     });
   };
