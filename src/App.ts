@@ -27,17 +27,19 @@ export default class App {
 
     ButtonSingleton.init(this.button_vm, bus);
     //StorageModule.clear();
+    this.load_modules(bus);
+    // call after modules so all button functionnalities are registered in core module
+    this.load_palette_and_node_menu(bus);
+  }
 
-    const storage_module = new StorageModule(this.graph);
-    storage_module.install(bus);
+  private load_modules(bus: AlgorithmEvents) {
+    const storage_module = new StorageModule(this, bus);
+    storage_module.install();
     const graph_module = new GraphModule(this.graph);
     graph_module.install(bus, this.container);
 
     const algorithm_module = new AlgorithmModule(this.graph);
     algorithm_module.install(bus, this.container);
-
-    // call after modules so all button functionnalities are registered in core module
-    this.load_palette_and_node_menu(bus);
   }
 
   private load_palette_and_node_menu(bus: AlgorithmEvents) {

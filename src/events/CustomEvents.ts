@@ -5,7 +5,7 @@ import FigureRegistry from "../registry/FigureRegistry";
 
 export default class CustomEvents extends EventTarget {
   // Je sais que ça mélange les responsabilités mais le bus est partagé et c'st la seule fonction d'état globale de l'app
-  // j'extrairait cet attribut plus tard
+  // j'extrairai cet attribut plus tard
   public active_action_key: string | null = null;
 
   constructor() {
@@ -21,6 +21,12 @@ export default class CustomEvents extends EventTarget {
 
   deactivate_all_actions() {
     let event = new CustomEvent("deactivate:actions", {});
+
+    this.dispatchEvent(event);
+  }
+
+  deactivate_app() {
+    let event = new CustomEvent("deactivate:app", {});
 
     this.dispatchEvent(event);
   }
