@@ -27,7 +27,9 @@ export default class BFSDomBuilder implements DomBuilder<Button> {
     this.highlight_node();
     this.remove_highlight_node();
     this.nodes = [];
-    this.figure_action = FigureRegistry.get_action_by_id("play_bfs");
+    this.figure_action = FigureRegistry.get_action_by_id(
+      this.container.id + "_play_bfs",
+    );
     this.deactivate_all_actions();
   }
 

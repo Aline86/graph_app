@@ -1,18 +1,18 @@
-import type App from "../App";
-import type AlgorithmEvents from "../events/AgorithmEvents";
+import type CustomEvents from "../events/CustomEvents";
 import type Module from "../interface/Module";
+import type Graph from "../model/Graph";
 import FigureRegistry from "../registry/FigureRegistry";
 
 export default class StorageModule implements Module {
-  app: App;
-  bus: AlgorithmEvents;
-  constructor(app: App, bus: AlgorithmEvents) {
-    this.app = app;
+  graph: Graph;
+  bus: CustomEvents;
+  constructor(graph: Graph, bus: CustomEvents) {
+    this.graph = graph;
     this.bus = bus;
 
     FigureRegistry.register({
-      actions_id: "palette",
-      id: this.app.graph.id + "_" + "clear",
+      actions_id: this.graph.id + "_palette",
+      id: this.graph.id + "_" + "clear",
       class_name: "clear",
       name: "Supprimer le graphe",
       action: "click",
@@ -35,17 +35,17 @@ export default class StorageModule implements Module {
   }
 
   private save() {
-    localStorage.setItem("graph", JSON.stringify(this.app.graph));
+    localStorage.setItem(String(this.graph.id), JSON.stringify(this.graph));
   }
   private clear = () => {
-    const data = localStorage.removeItem("graph");
+    const data = localStorage.removeItem(this.graph.id);
     this.bus.deactivate_app();
 
     return data;
   };
-  static load(): any | null {
-    const data = localStorage.getItem("graph");
+  load = () => {
+    const data = localStorage.getItem(this.graph.id);
 
     return data ? JSON.parse(data) : null;
-  }
+  };
 }

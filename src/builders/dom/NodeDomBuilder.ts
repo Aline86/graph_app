@@ -96,7 +96,7 @@ export default class NodeDomBuilder
     }
   };
   create_node_buttons(node_id: string): void {
-    const actions = FigureRegistry.get("menu_node");
+    const actions = FigureRegistry.get(this.container.id + "_menu_node");
     if (!actions) return;
     for (const action of actions) {
       this.create_button_on_node(node_id, action);

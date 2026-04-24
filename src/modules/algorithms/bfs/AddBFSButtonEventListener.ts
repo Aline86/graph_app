@@ -14,7 +14,7 @@ export default class AddBFSButtonEventListener {
 
   remove_action = () => {};
   add_node_button = (): void => {
-    const actions = FigureRegistry.get("play_bfs");
+    const actions = FigureRegistry.get(this.container.id + "_play_bfs");
 
     if (this.container && actions) {
       for (const key in actions) {

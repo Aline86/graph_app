@@ -27,7 +27,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
     }
   };
   add = () => {
-    const actions = FigureRegistry.get("palette");
+    const actions = FigureRegistry.get(this.graph.id + "_palette");
 
     if (actions)
       for (const action of actions) {
@@ -37,7 +37,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
           action.id,
           action.class_name,
           action.handler,
-          "button_container",
+          this.container.id + "_palette_container",
           action.mode,
         );
       }
@@ -54,7 +54,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
 
   activate_buttons = () => {
     this.bus.addEventListener("activate:buttons", () => {
-      const actions = FigureRegistry.get("palette");
+      const actions = FigureRegistry.get(this.graph.id + "_palette");
 
       if (actions)
         for (const action of actions) {

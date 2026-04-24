@@ -4,21 +4,24 @@
   user-select: none;
 }
 #app {
-  width: 100%;
-  position: absolute;
+  width: calc(100% - 6px);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 }
 
 .graph {
-  position: absolute;
-
+  height: 100vh;
+  min-width: 100%;
   margin: 0 auto;
+  height: 100vh;
+  border: 3px solid black;
 }
-#button_container {
-  position: fixed;
+._palette_container {
+  position: absolute;
   z-index: 0;
   bottom: 60px;
-  left: 0;
+  display: flex;
 }
 #svg-layer {
   inset: 0;
@@ -51,7 +54,7 @@ button,
   border: lightgray;
   color: lightgray;
 }
-#button_container button {
+._palette_container button {
   width: 250px;
 
   background-color: white;
@@ -113,7 +116,7 @@ input {
   padding: 10px;
   background-color: white;
 
-  left: 50%;
+  left: 150px;
   transform: translate(-50%, 50%);
 }
 .active {
@@ -122,7 +125,7 @@ input {
   background-color: white;
   padding: 10px;
 
-  left: 50%;
+  left: 150px;
   transform: translate(-50%, 50%);
 }
 .node.visited > input {

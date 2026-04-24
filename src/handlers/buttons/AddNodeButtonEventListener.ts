@@ -26,7 +26,9 @@ export default class AddNodeButtonEventListener {
 
   action = (element: HTMLElement) => {
     this.container.appendChild(element);
-    const handler = FigureRegistry.get_action_by_id("add_node");
+    const handler = FigureRegistry.get_action_by_id(
+      this.container.id + "_add_node",
+    );
 
     if (handler) {
       const button = document.getElementById(element.id);

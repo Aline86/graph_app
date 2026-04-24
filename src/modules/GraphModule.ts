@@ -5,27 +5,21 @@ import FigureRegistry from "../registry/FigureRegistry";
 import GraphView from "../view/GraphView";
 import ArrowModule from "./ArrowModule";
 import NodeModule from "./NodeModule";
-import StorageModule from "./StorageModule";
 
 export default class GraphModule implements Module {
   graph: Graph;
   constructor(graph: Graph) {
     this.graph = graph;
-    const stored_graph = StorageModule.load();
-
-    if (stored_graph) {
-      this.graph.init(stored_graph);
-    }
   }
 
   install(bus: CustomEvents, container: HTMLElement) {
     const graph = new GraphView(container, this.graph, bus);
     FigureRegistry.register({
-      actions_id: "menu_node",
+      actions_id: container.id + "_menu_node",
       name: "Supprimer le noeud",
       class_name: "remove_node",
       action: "click",
-      id: container.id + "_" + "remove_node",
+      id: this.graph.id + "_" + "remove_node",
       mode: "active",
       handler: graph.graph_handler.remove_node,
     });
