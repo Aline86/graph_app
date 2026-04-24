@@ -27,7 +27,7 @@ export default class BFSModule implements Module {
   install = () => {
     FigureRegistry.register({
       actions_id: "play_bfs",
-      name: "Play BFS",
+      name: "Algorithme BFS",
       id: this.container.id + "_" + "play_bfs",
       class_name: "play_bfs",
       action: "click",
