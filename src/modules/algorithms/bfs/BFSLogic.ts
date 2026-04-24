@@ -28,14 +28,14 @@ export default class BFSLogic extends DomUtils {
   async bfs(hashmap: Map<string, string[]>, start: string): Promise<void> {
     const visited: string[] = [];
 
-    const queue = [start];
-    while (queue.length > 0) {
-      const current = queue.shift()!;
+    const stack = [start];
+    while (stack.length > 0) {
+      const current = stack.shift()!;
       if (visited.includes(current)) continue;
 
       this.bfs_vm.trigger_highlight_node(current);
       visited.push(current);
-      queue.push(...(hashmap.get(current) ?? []));
+      stack.push(...(hashmap.get(current) ?? []));
 
       await this.sleep(500);
     }
