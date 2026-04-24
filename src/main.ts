@@ -17,7 +17,6 @@ if (Object.keys(localStorage).length > 0) {
     new App(graph, "#app", bus, storage_module);
   }
 } else {
-  localStorage.clear();
   const bus = new AlgorithmEvents();
   const graph = new Graph(50, 0);
   const storage_module = new Storage(graph, bus);
