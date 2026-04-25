@@ -83,7 +83,7 @@ GraphAlgorithmModule
 
 - J'ai choisi d'utiliser un bus d'évènements plutôt qu'un store pour trigger et dispactcher les évènements DOM car un store gère l'état interne de l'app. Le store mute les valeurs alors que le bus génère juste un évènement de reaction, le store aurait mélangé les responsabilités et le code également par conséquent.
 
-- J'ai choisi un découplage modulaire pour ne pas à avoir à toucher à la logique de création d'édition de graphe lorsque je rajoute des algorithmes, l'objectif c'est de pouvoir rajouter plein de modules sans toucher à la logique centralisée.
+- J'ai choisi un découplage modulaire pour ne pas à avoir à toucher à la logique de création et d'édition de graphe lorsque je rajoute des algorithmes, l'objectif c'est de pouvoir rajouter plein de modules sans toucher à la logique centralisée.
 
 - Mon prochain chantier de travail sera de finir de découpler totalement la logique dom de la logique des view model notamment pour que ce soit testable plus facilement, que le dom ne connaisse pas du tout les models même si ils ont besoin d'afficher les informations contenues dans les instances.
 
