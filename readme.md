@@ -85,7 +85,7 @@ GraphAlgorithmModule
 
 - J'ai choisi un découplage modulaire pour ne pas à avoir à toucher à la logique de création et d'édition de graphe lorsque je rajoute des algorithmes, l'objectif c'est de pouvoir rajouter plein de modules sans toucher à la logique centralisée.
 
-- Mon prochain chantier de travail sera de finir de découpler totalement la logique dom de la logique des view model notamment pour que ce soit testable plus facilement, que le dom ne connaisse pas du tout les models même si ils ont besoin d'afficher les informations contenues dans les instances.
+- Mon prochain chantier de travail sera de finir de découpler totalement la logique dom de la logique des view model notamment pour que ce soit testable plus facilement, que les doms builders ne connaissent pas du tout les models même si ils ont besoin d'afficher les informations contenues dans les instances.
 
 ## Limitations actuelles vouées à modications futures
 
