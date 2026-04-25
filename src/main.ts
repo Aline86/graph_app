@@ -3,7 +3,9 @@ import App from "./App.ts";
 import Graph from "./model/Graph.ts";
 import AlgorithmEvents from "./events/AgorithmEvents.ts";
 import Storage from "./modules/Storage.ts";
-
+if (Object.keys(localStorage).length === 2) {
+  localStorage.clear();
+}
 if (Object.keys(localStorage).length > 0) {
   for (const key of Object.keys(localStorage)) {
     const _graph = localStorage.getItem(key);
