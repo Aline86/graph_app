@@ -14,7 +14,13 @@ Le graphe s'enregistre dans la session du navigateur.
 
 ![Démonstration de l'éditeur de graphes](./src/assets/graph.gif)
 
----
+## Qualité de code :
+
+![Code Health](https://img.shields.io/badge/code%20health-9.91%20%2F%2010-1D9E75?style=flat&logo=data:image/svg+xml;base64,...)
+
+CodeScene :
+
+## ![Codescene](./src/assets/code_scene.png)
 
 ## Architecture MVVM
 
