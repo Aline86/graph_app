@@ -1,5 +1,7 @@
 # Architecture — Editeur de graphes
 
+![TypeScript](https://img.shields.io/badge/TypeScript-typed-3178C6?style=flat&logo=typescript&logoColor=white)
+
 ## Introduction
 
 Ce projet est un éditeur de graphes qui se veut modulaire grâce au câblage de nouveaux algorithmes sans toucher le code centralisé d'édition de graphes. Il est ainsi possible de créer un graphe manuellement et de lancer un algorithme dessus.
