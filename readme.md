@@ -99,4 +99,4 @@ Ecrire des tests
 
 Refacto Dom View Models par endroits
 
-Réécrire logique Arrow View pour que les calculs de position soient relatifs au container et non au viewport
+Réécrire logique Arrow Position pour que les calculs de position soient relatifs au container et non au viewport
