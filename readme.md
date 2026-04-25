@@ -8,6 +8,12 @@ Pour avoir une arrête bidirectionnelle, il s'agit de créer l'arête aller et l
 
 Le graphe s'enregistre dans la session du navigateur.
 
+## Démo
+
+🔗 [Voir la démo en ligne](https://graph-app-kappa.vercel.app/)
+
+![Démonstration de l'éditeur de graphes](./src/assets/graph.gif)
+
 ---
 
 ## Architecture MVVM
