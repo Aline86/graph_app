@@ -14,7 +14,7 @@ Le graphe s'enregistre dans la session du navigateur.
 
 ### Module
 
-Point d'entrée de chaque fonctionnalité. Il enregistre les actions disponibles (`register`) et câble tous les composants ensemble (`install`). C'est le seul endroit où les dépendances sont assemblées.
+Point d'entrée de chaque fonctionnalité. Il enregistre les actions disponibles et câble tous les composants ensemble (`install`). C'est l' endroit où les dépendances et les actions sont assemblées.
 
 ```
 GraphModule
@@ -32,7 +32,7 @@ Réagit aux actions utilisateur (clics, node dragging). Il appelle le ViewModel 
 
 ### DomBuilder
 
-Responsable des mutations DOM, il écoute l'event bus et met à jour l'affichage en conséquence.
+Responsable des mutations DOM, il écoute l'event bus et met à jour l'affichage.
 
 ### View
 
@@ -56,13 +56,13 @@ Les modules existants reçoivent `CustomEvents` en paramètre — ils acceptent 
 
 ## Le FigureRegistry
 
-Registre statique qui mappe des identifiants d'actions à des handlers. Les ids sont des identifiants de **catégorie** (`node_events`, `arrow_events`), pas d'instances DOM lié à l'instance.
+Registre statique qui mappe des identifiants d'actions à des handlers. Les ids sont des identifiants de **catégorie** (`node_events`, `arrow_events`) associé à l'identifiant de l'instance de graphe auquel le bouton et son action associée doivent se rattacher.
 
 ---
 
 ## MVVM plutôt que MVC
 
-Il est difficile de scinder les évènements des éléments dom avec une structure MVC, on arrive rapidement à un modèle hybride et difficilement maintenable.
+Il est difficile de scinder les évènements des éléments dom avec une structure MVC, on arrive rapidement à un modèle hybride et difficilement maintenable. Plus adapté si on veut rajouter des fonctionnalités liées aux évènementx si on ne veut pas mélanger logique associée aux évènements dom et affichage des éléments.
 
 ---
 
