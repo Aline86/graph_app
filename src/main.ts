@@ -3,6 +3,7 @@ import App from "./App.ts";
 import Graph from "./model/Graph.ts";
 import AlgorithmEvents from "./events/AgorithmEvents.ts";
 import Storage from "./modules/Storage.ts";
+// to force navigator refresh if user came on website before new storage system
 if (Object.keys(localStorage).length >= 2) {
   localStorage.clear();
 }
