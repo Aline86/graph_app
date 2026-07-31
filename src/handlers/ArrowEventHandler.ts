@@ -1,7 +1,6 @@
 import type CustomEvents from "../events/CustomEvents";
 import type Arrow from "../model/Arrow";
 import type Node from "../model/Node";
-import Position from "../model/Position";
 import DomUtils from "../utils/DomUtils";
 import type ArrowViewModel from "../viewmodel/ArrowViewModel";
 
