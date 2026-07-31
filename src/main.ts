@@ -27,10 +27,3 @@ if (Object.keys(localStorage).length > 0) {
 
   new App(graph, "#app", bus, storage_module);
 }
-
-const bus = new AlgorithmEvents();
-const graph = new Graph(50, 0);
-graph.init(graph);
-const storage_module = new Storage(graph, bus);
-
-new App(graph, "#app", bus, storage_module);
