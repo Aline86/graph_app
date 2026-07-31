@@ -4,7 +4,7 @@ import Graph from "./model/Graph.ts";
 import AlgorithmEvents from "./events/AgorithmEvents.ts";
 import Storage from "./modules/Storage.ts";
 // to force navigator refresh if user came on website before new storage system
-if (Object.keys(localStorage).length >= 2) {
+if (Object.keys(localStorage).length > 2) {
   localStorage.clear();
 }
 if (Object.keys(localStorage).length > 0) {
@@ -27,3 +27,9 @@ if (Object.keys(localStorage).length > 0) {
 
   new App(graph, "#app", bus, storage_module);
 }
+const bus = new AlgorithmEvents();
+const graph = new Graph(50, 0);
+graph.init(graph);
+const storage_module = new Storage(graph, bus);
+
+new App(graph, "#app", bus, storage_module);

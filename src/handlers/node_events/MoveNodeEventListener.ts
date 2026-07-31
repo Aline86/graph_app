@@ -9,6 +9,8 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
   node_db: MenuDomBuilder;
   bus: CustomEvents;
   drawing: boolean;
+  private lastX = 0;
+  private lastY = 0;
   constructor(
     node_vm: NodeViewModel,
     node_db: MenuDomBuilder,
@@ -36,16 +38,19 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
 
   private on_mouse_down = (event: MouseEvent) => {
     const target = (event.target as HTMLElement).closest(".node");
-
     if (!target) return;
-
     this.dragged_node = target.id;
+    this.lastX = event.clientX;
+    this.lastY = event.clientY;
   };
 
   private on_mouse_move = (event: MouseEvent) => {
     if (!this.dragged_node) return;
-
-    this.node_vm.addMoveEventListener(event, this.dragged_node);
+    const dx = event.clientX - this.lastX;
+    const dy = event.clientY - this.lastY;
+    this.lastX = event.clientX;
+    this.lastY = event.clientY;
+    this.node_vm.addMoveEventListener(dx, dy, this.dragged_node);
   };
 
   private on_mouse_up = () => {
