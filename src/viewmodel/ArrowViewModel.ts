@@ -2,7 +2,7 @@ import CustomEvents from "../events/CustomEvents";
 import Arrow from "../model/Arrow";
 import type Graph from "../model/Graph";
 import Node from "../model/Node";
-import type Position from "../model/Position";
+import Position from "../model/Position";
 
 export default class ArrowViewModel {
   graph: Graph;
