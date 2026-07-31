@@ -29,17 +29,9 @@ export default class Node {
     this.color = color;
   };
 
-  move_node = (e: MouseEvent) => {
-    if (0 >= e.clientY) {
-      this.position.y = 0;
-    } else {
-      this.position.y = e.clientY - this.get_center();
-    }
-    if (0 >= e.clientX) {
-      this.position.x = 0;
-    } else {
-      this.position.x = e.clientX - this.get_center();
-    }
+  move_node = (dx: number, dy: number) => {
+    this.position.x = Math.max(0, this.position.x + dx);
+    this.position.y = Math.max(0, this.position.y + dy);
   };
 
   set_position(e: PositionInit) {

@@ -13,11 +13,15 @@ export default class NodeViewModel {
     const node = this.graph.create_node();
     return node;
   };
-  addMoveEventListener = (e: MouseEvent, target: string): void => {
+  addMoveEventListener = (
+    position_x: number,
+    position_y: number,
+    target: string,
+  ): void => {
     const node = this.graph.nodes[target];
 
     if (node) {
-      node.move_node(e);
+      node.move_node(position_x, position_y);
 
       this.bus.update_coordinates(node);
     }

@@ -58,8 +58,7 @@ export default class ArrowEventHandler extends DomUtils {
     const { arrow, handler } = this.state;
     if (!handler || !arrow) return;
 
-    const pos = this.get_target_position(node.id);
-    if (pos) this.arrow_vm.add_end_node(node, arrow, pos.x, pos.y);
+    this.arrow_vm.add_end_node(node, arrow);
 
     document.removeEventListener("mousemove", handler);
     this.state = { status: "still", arrow: null, handler: null };
@@ -67,12 +66,6 @@ export default class ArrowEventHandler extends DomUtils {
   }
 
   private create_arrow(target: string) {
-    const el = document.getElementById(target);
-    if (!el) return null;
-    const rect = el.getBoundingClientRect();
-    return this.arrow_vm.create_arrow(
-      target,
-      new Position(rect.left + window.scrollX, rect.top + window.scrollY),
-    );
+    return this.arrow_vm.create_arrow(target);
   }
 }

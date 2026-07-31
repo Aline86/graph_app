@@ -15,25 +15,18 @@ export default class ArrowViewModel {
     this.bus = bus;
   }
 
-  create_arrow(target: string, position: Position) {
-    if (!this.graph.nodes[target]) return;
-    this.graph.nodes[target].set_position(position);
-    const arrow = new Arrow(this.graph.nodes[target]);
-    this.graph.arrows[arrow.id] = arrow;
-    return arrow;
-  }
   remove_arrow(target: string) {
     const arrow = this.graph.arrows[target];
     delete this.graph.arrows[target];
     this.bus.trigger_remove_arrow(arrow);
   }
-  add_end_node = (target: Node, arrow: Arrow, x: number, y: number): void => {
+  add_end_node = (target: Node, arrow: Arrow): void => {
     if (
       this.graph.nodes[target.id] !== undefined &&
       target.id !== arrow.start_node.id
     ) {
-      this.graph.nodes[target.id].position.x = x;
-      this.graph.nodes[target.id].position.y = y;
+      this.graph.nodes[target.id].position.x = target.position.x;
+      this.graph.nodes[target.id].position.y = target.position.y;
       arrow.set_end_node(this.graph.nodes[target.id]);
       arrow.calculate_length();
       this.bus.trigger_draw_arrow(arrow);
@@ -56,4 +49,12 @@ export default class ArrowViewModel {
 
     this.bus.trigger_draw_arrow(arrow);
   };
+
+  create_arrow(target: string) {
+    const node = this.graph.nodes[target];
+    if (!node) return;
+    const arrow = new Arrow(node);
+    this.graph.arrows[arrow.id] = arrow;
+    return arrow;
+  }
 }

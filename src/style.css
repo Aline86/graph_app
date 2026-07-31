@@ -11,10 +11,9 @@
 }
 
 .graph {
+  position: relative;
   height: 100vh;
   min-width: 100%;
-  margin: 0 auto;
-  height: 100vh;
   border: 3px solid black;
 }
 ._palette_container {
@@ -22,6 +21,7 @@
   z-index: 0;
   bottom: 60px;
   display: flex;
+  z-index: 1;
 }
 #svg-layer {
   inset: 0;
@@ -38,6 +38,7 @@
 button,
 .node {
   cursor: pointer;
+  z-index: 9999;
 }
 
 .none {
