@@ -1,18 +1,15 @@
 import type CustomEvents from "../../events/CustomEvents";
 import type Node from "../../model/Node";
 import FigureRegistry from "../../registry/FigureRegistry";
-import DomUtils from "../../utils/DomUtils";
+;
 import type DomBuilder from "./DomBuilder";
 
-export default class MenuDomBuilder
-  extends DomUtils
-  implements DomBuilder<Node>
-{
+export default class MenuDomBuilder implements DomBuilder<Node> {
   container: HTMLElement;
   bus: CustomEvents;
 
   constructor(container: HTMLElement, bus: CustomEvents) {
-    super();
+  
     this.bus = bus;
     this.container = container;
   }
@@ -30,7 +27,14 @@ export default class MenuDomBuilder
     if (!node) return;
     this.remove_node_from_dom(node);
   };
+  public remove_node_from_dom = (target?: Node) => {
+    if (!target) return;
+    const el = document.getElementById(target.id);
 
+    if (el) {
+      el.remove();
+    }
+  };
   add = (): void => {};
   rename = (node?: Node): void => {
     if (!node) return;

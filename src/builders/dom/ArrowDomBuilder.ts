@@ -1,12 +1,10 @@
 import type CustomEvents from "../../events/CustomEvents";
 import type Arrow from "../../model/Arrow";
-import DomUtils from "../../utils/DomUtils";
 
-export default class ArrowDomBuilder extends DomUtils {
+export default class ArrowDomBuilder {
   container: string;
   bus: CustomEvents;
   constructor(container: string, bus: CustomEvents) {
-    super();
     this.container = container;
     this.bus = bus;
     this.on_draw_arrow();

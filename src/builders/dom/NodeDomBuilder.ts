@@ -3,14 +3,11 @@ import ButtonSingleton from "../../singleton/ButtonSingleton";
 import type Node from "../../model/Node";
 import type { FigureAction } from "../../registry/FigureRegistry";
 import FigureRegistry from "../../registry/FigureRegistry";
-import DomUtils from "../../utils/DomUtils";
+
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 import type DomBuilder from "./DomBuilder";
 
-export default class NodeDomBuilder
-  extends DomUtils
-  implements DomBuilder<Node>
-{
+export default class NodeDomBuilder implements DomBuilder<Node> {
   node_vm: NodeViewModel;
   bus: CustomEvents;
   container: HTMLElement;
@@ -21,7 +18,6 @@ export default class NodeDomBuilder
     container: HTMLElement,
     bus: CustomEvents,
   ) {
-    super();
     this.node_vm = node_vm;
     this.actions = [];
 
@@ -55,18 +51,18 @@ export default class NodeDomBuilder
 
   add_node = (): void => {
     const node = this.node_vm.create_node();
-   
-      const element = this.add(node);
-      this.node_vm.node_add_position(node);
-      if (element) {
-        this.container?.appendChild(element);
 
-        this.update_position(node);
+    const element = this.add(node);
+    this.node_vm.node_add_position(node);
+    if (element) {
+      this.container?.appendChild(element);
 
-        this.create_node_buttons(node.id);
-        this.bus.activate_buttons();
-        this.bus.add_node();
-      }
+      this.update_position(node);
+
+      this.create_node_buttons(node.id);
+      this.bus.activate_buttons();
+      this.bus.add_node();
+    }
   };
   add = (node?: Node): HTMLElement | void => {
     if (!node) return;
@@ -136,4 +132,14 @@ export default class NodeDomBuilder
 
     container.appendChild(button);
   }
+  private update_position = (node?: Node): void => {
+    if (!node) return;
+    const _node = document.getElementById(node.id);
+
+    if (_node) {
+      _node.style.left = node.position.x + "px";
+      _node.style.top = node.position.y + "px";
+      _node.style.position = "absolute";
+    }
+  };
 }

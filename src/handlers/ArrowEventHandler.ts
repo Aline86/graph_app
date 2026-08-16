@@ -1,7 +1,7 @@
 import type CustomEvents from "../events/CustomEvents";
 import type Arrow from "../model/Arrow";
 import type Node from "../model/Node";
-import DomUtils from "../utils/DomUtils";
+
 import type ArrowViewModel from "../viewmodel/ArrowViewModel";
 
 type ArrowState = {
@@ -10,13 +10,12 @@ type ArrowState = {
   handler: ((e: MouseEvent) => void) | null;
 };
 
-export default class ArrowEventHandler extends DomUtils {
+export default class ArrowEventHandler {
   private state: ArrowState = { status: "still", arrow: null, handler: null };
   arrow_vm: ArrowViewModel;
   container: string;
   bus: CustomEvents;
   constructor(arrow_vm: ArrowViewModel, container: string, bus: CustomEvents) {
-    super();
     this.arrow_vm = arrow_vm;
     this.container = container;
     this.bus = bus;

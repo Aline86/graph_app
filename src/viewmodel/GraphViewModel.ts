@@ -36,8 +36,6 @@ export default class GraphViewModel {
   };
   get_linked_arrows(arrow: Arrow, node_id: string) {
     if (arrow.end_node?.id === node_id || arrow.start_node.id === node_id) {
-      arrow.calculate_length();
-
       this.bus.trigger_draw_arrow(arrow);
     }
   }

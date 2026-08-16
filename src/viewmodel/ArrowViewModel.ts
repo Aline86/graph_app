@@ -5,12 +5,10 @@ import Node from "../model/Node";
 
 export default class ArrowViewModel {
   graph: Graph;
-  last_target: string | null;
   public bus: CustomEvents;
+
   constructor(graph: Graph, bus: CustomEvents) {
     this.graph = graph;
-
-    this.last_target = null;
     this.bus = bus;
   }
 
@@ -36,10 +34,6 @@ export default class ArrowViewModel {
   };
   is_adequate_target(target: string) {
     return this.graph.nodes[target] !== undefined;
-  }
-
-  get_last_target() {
-    return this.last_target;
   }
 
   create_arrow(target: string) {

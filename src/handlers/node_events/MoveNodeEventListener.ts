@@ -2,22 +2,23 @@ import type MenuDomBuilder from "../../builders/dom/MenuDomBuilder";
 import CustomEvents from "../../events/CustomEvents";
 import type EventHandler from "../../interface/EventHandler";
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
+import Node from "./../../model/Node";
 
 export default class MoveNodeEventListener implements EventHandler<Node> {
   private dragged_node: string | null = null;
   node_vm: NodeViewModel;
-  node_db: MenuDomBuilder;
+  menu_db: MenuDomBuilder;
   bus: CustomEvents;
   drawing: boolean;
   private lastX = 0;
   private lastY = 0;
   constructor(
     node_vm: NodeViewModel,
-    node_db: MenuDomBuilder,
+    menu_db: MenuDomBuilder,
     bus: CustomEvents,
   ) {
     this.node_vm = node_vm;
-    this.node_db = node_db;
+    this.menu_db = menu_db;
     this.bus = bus;
     this.drawing = false;
 
@@ -33,9 +34,18 @@ export default class MoveNodeEventListener implements EventHandler<Node> {
   }
   private on_position_update = (e: Event) => {
     const node = (e as CustomEvent).detail;
-    this.node_db.update_position(node.node);
+    this.update_position(node.node);
   };
+  private update_position = (node?: Node): void => {
+    if (!node) return;
+    const _node = document.getElementById(node.id);
 
+    if (_node) {
+      _node.style.left = node.position.x + "px";
+      _node.style.top = node.position.y + "px";
+      _node.style.position = "absolute";
+    }
+  };
   private on_mouse_down = (event: MouseEvent) => {
     const target = (event.target as HTMLElement).closest(".node");
     if (!target) return;

@@ -1,15 +1,13 @@
 import type AlgorithmEvents from "../../../events/AgorithmEvents";
 import type Graph from "../../../model/Graph";
-import DomUtils from "../../../utils/DomUtils";
 import BFSViewModel from "./BFSViewModel";
 
-export default class BFSLogic extends DomUtils {
+export default class BFSLogic {
   bus: AlgorithmEvents;
   bfs_vm: BFSViewModel;
   graph: Graph;
   trigger: boolean = false;
   constructor(graph: Graph, bus: AlgorithmEvents) {
-    super();
     this.bus = bus;
     this.graph = graph;
     this.bfs_vm = new BFSViewModel(graph, bus);

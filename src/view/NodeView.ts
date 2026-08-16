@@ -2,10 +2,9 @@ import MenuDomBuilder from "../builders/dom/MenuDomBuilder";
 import NodeDomBuilder from "../builders/dom/NodeDomBuilder";
 import type CustomEvents from "../events/CustomEvents";
 import NodeMenuEventHandler from "../handlers/NodeMenuEventHandler";
-import DomUtils from "../utils/DomUtils";
 import NodeViewModel from "../viewmodel/NodeViewModel";
 
-export default class NodeView extends DomUtils {
+export default class NodeView {
   container: HTMLElement;
   node_vm: NodeViewModel;
   menu_db: MenuDomBuilder;
@@ -18,8 +17,6 @@ export default class NodeView extends DomUtils {
     node_vm: NodeViewModel,
     bus: CustomEvents,
   ) {
-    super();
-
     this.container = container;
     this.menu_db = new MenuDomBuilder(container, bus);
     this.node_vm = node_vm;
