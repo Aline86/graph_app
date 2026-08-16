@@ -1,7 +1,7 @@
 import type CustomEvents from "../../events/CustomEvents";
 import type Node from "../../model/Node";
 import FigureRegistry from "../../registry/FigureRegistry";
-;
+
 import type DomBuilder from "./DomBuilder";
 
 export default class MenuDomBuilder implements DomBuilder<Node> {
