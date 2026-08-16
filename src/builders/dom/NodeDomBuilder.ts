@@ -6,7 +6,6 @@ import FigureRegistry from "../../registry/FigureRegistry";
 import DomUtils from "../../utils/DomUtils";
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 import type DomBuilder from "./DomBuilder";
-import Position from "../../model/Position";
 
 export default class NodeDomBuilder
   extends DomUtils
