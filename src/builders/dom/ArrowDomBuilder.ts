@@ -63,7 +63,7 @@ export default class ArrowDomBuilder extends DomUtils {
       defs.appendChild(marker);
       svg.appendChild(defs);
 
-      document.getElementById(this.container)?.parentElement?.appendChild(svg);
+      document.getElementById(this.container)?.appendChild(svg);
     }
 
     let line = document.getElementById(
@@ -74,34 +74,40 @@ export default class ArrowDomBuilder extends DomUtils {
       line.id = arrow.id + "-line";
       line.setAttribute("marker-end", `url(#${arrow.id}-arrowhead)`);
       svg.appendChild(line);
+      svg.style.position = "absolute";
+      svg.style.left = "0";
+      svg.style.top = "0";
+      svg.style.width = "100%";
+      svg.style.height = "100%";
     }
 
-    const startEl = document.getElementById(arrow.start_node.id + "");
-    const startRect = startEl!.getBoundingClientRect();
-    const x1 = startRect.left + startRect.width / 2 + window.scrollX;
-    const y1 = startRect.top + startRect.height / 2 + window.scrollY;
+    const half_start = arrow.start_node.node_width * 0.5;
+    const x1 = arrow.start_node.position.x + half_start;
+    const y1 = arrow.start_node.position.y + half_start;
 
     let x2: number;
     let y2: number;
 
     if (arrow.end_node) {
-      const endEl = document.getElementById(arrow.end_node.id + "");
-      const endRect = endEl!.getBoundingClientRect();
-      const rawX2 = endRect.left + endRect.width / 2 + window.scrollX;
-      const rawY2 = endRect.top + endRect.height / 2 + window.scrollY;
+      const radius = arrow.end_node.node_width * 0.5;
+      const cx = arrow.end_node.position.x + radius;
+      const cy = arrow.end_node.position.y + radius;
 
-      const dx = rawX2 - x1;
-      const dy = rawY2 - y1;
-      const length = Math.sqrt(dx * dx + dy * dy);
+      const dx = cx - x1;
+      const dy = cy - y1;
+      const length = Math.hypot(dx, dy);
 
-      const radius = endRect.width * 0.5;
-      x2 = rawX2 - (dx / length) * radius;
-      y2 = rawY2 - (dy / length) * radius;
+      if (length === 0) {
+        x2 = cx;
+        y2 = cy;
+      } else {
+        x2 = cx - (dx / length) * radius;
+        y2 = cy - (dy / length) * radius;
+      }
     } else {
       x2 = arrow.end_tmp.x;
       y2 = arrow.end_tmp.y;
     }
-
     line.setAttribute("x1", String(x1));
     line.setAttribute("y1", String(y1));
     line.setAttribute("x2", String(x2));

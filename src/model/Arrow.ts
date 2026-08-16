@@ -34,21 +34,7 @@ export default class Arrow {
       this.calculate_angle();
     }
   }
-  calculate_tmp_length(event: MouseEvent) {
-    this.lengthX = event.pageX - this.start_node.position.x;
-    this.lengthY = event.pageY - this.start_node.position.y;
-    this.end_tmp.x = event.pageX;
-    this.end_tmp.y = event.pageY;
-  }
 
-  calculate_tmp_angle(event: MouseEvent) {
-    const radiant = Math.atan2(
-      event.pageY - this.start_node.position.y,
-      event.pageX - this.start_node.position.x,
-    );
-
-    this.direction = (radiant * 180) / Math.PI;
-  }
   calculate_angle() {
     if (this.end_node) {
       const radiant = Math.atan2(
@@ -56,16 +42,7 @@ export default class Arrow {
         this.end_node.position.x - this.start_node.position.x,
       );
       this.direction = (radiant * 180) / Math.PI;
-    } else {
-      const radiant = Math.atan2(
-        this.end_tmp.y - this.start_node.position.y,
-        this.end_tmp.x - this.start_node.position.x,
-      );
-      this.direction = (radiant * 180) / Math.PI;
-    }
+    } 
   }
 
-  draw_line(e: MouseEvent) {
-    this.calculate_tmp_length(e);
-  }
 }

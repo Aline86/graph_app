@@ -2,7 +2,6 @@ import CustomEvents from "../events/CustomEvents";
 import Arrow from "../model/Arrow";
 import type Graph from "../model/Graph";
 import Node from "../model/Node";
-import type Position from "../model/Position";
 
 export default class ArrowViewModel {
   graph: Graph;
@@ -28,7 +27,7 @@ export default class ArrowViewModel {
       this.graph.nodes[target.id].position.x = target.position.x;
       this.graph.nodes[target.id].position.y = target.position.y;
       arrow.set_end_node(this.graph.nodes[target.id]);
-      arrow.calculate_length();
+
       this.bus.trigger_draw_arrow(arrow);
     } else {
       delete this.graph.arrows[arrow.id];
@@ -38,17 +37,10 @@ export default class ArrowViewModel {
   is_adequate_target(target: string) {
     return this.graph.nodes[target] !== undefined;
   }
-  addDrawArrowEventListener = (e: MouseEvent, arrow: Arrow): void => {
-    this.draw_arrow(e, arrow);
-  };
+
   get_last_target() {
     return this.last_target;
   }
-  draw_arrow = (e: MouseEvent, arrow: Arrow) => {
-    arrow.draw_line(e);
-
-    this.bus.trigger_draw_arrow(arrow);
-  };
 
   create_arrow(target: string) {
     const node = this.graph.nodes[target];
@@ -57,4 +49,11 @@ export default class ArrowViewModel {
     this.graph.arrows[arrow.id] = arrow;
     return arrow;
   }
+
+  set_pointer_target = (x: number, y: number, arrow: Arrow) => {
+    arrow.end_tmp.x = x;
+    arrow.end_tmp.y = y;
+
+    this.bus.trigger_draw_arrow(arrow);
+  };
 }

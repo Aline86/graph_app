@@ -46,8 +46,17 @@ export default class ArrowEventHandler extends DomUtils {
     const arrow = this.create_arrow(node.id);
     if (!arrow) return;
 
+    const el = document.getElementById(this.container);
+    const rect = el!.getBoundingClientRect();
+    const offset_x = rect.left + el!.clientLeft;
+    const offset_y = rect.top + el!.clientTop;
+
     const handler = (e: MouseEvent) =>
-      this.arrow_vm.addDrawArrowEventListener(e, arrow);
+      this.arrow_vm.set_pointer_target(
+        e.clientX - offset_x,
+        e.clientY - offset_y,
+        arrow,
+      );
     document.addEventListener("mousemove", handler);
 
     this.state = { status: "drawing", arrow, handler };

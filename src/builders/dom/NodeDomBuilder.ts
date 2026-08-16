@@ -16,7 +16,7 @@ export default class NodeDomBuilder
   bus: CustomEvents;
   container: HTMLElement;
   actions: FigureAction<any>[] | undefined;
-  private node_count = 0;
+
   constructor(
     node_vm: NodeViewModel,
     container: HTMLElement,
@@ -56,21 +56,18 @@ export default class NodeDomBuilder
 
   add_node = (): void => {
     const node = this.node_vm.create_node();
-    const element = this.add(node);
+   
+      const element = this.add(node);
+      this.node_vm.node_add_position(node);
+      if (element) {
+        this.container?.appendChild(element);
 
-    if (element) {
-      this.container?.appendChild(element);
+        this.update_position(node);
 
-      const i = this.node_count++;
-      node.set_position(
-        new Position(100 + (i % 6) * 90, 100 + Math.floor(i / 6) * 90),
-      );
-      this.update_position(node);
-
-      this.create_node_buttons(node.id);
-      this.bus.activate_buttons();
-      this.bus.add_node();
-    }
+        this.create_node_buttons(node.id);
+        this.bus.activate_buttons();
+        this.bus.add_node();
+      }
   };
   add = (node?: Node): HTMLElement | void => {
     if (!node) return;

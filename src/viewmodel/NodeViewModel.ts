@@ -1,6 +1,7 @@
 import CustomEvents from "../events/CustomEvents";
 import type Graph from "../model/Graph";
-
+import Node from "../model/Node";
+import Position from "../model/Position";
 export default class NodeViewModel {
   graph: Graph;
   public bus: CustomEvents;
@@ -8,7 +9,13 @@ export default class NodeViewModel {
     this.bus = bus;
     this.graph = graph;
   }
+  node_add_position = (node: Node) => {
+    const i = Object.keys(this.graph.nodes).length - 1;
 
+    node.set_position(
+      new Position(100 + (i % 6) * 90, 100 + Math.floor(i / 6) * 90),
+    );
+  };
   create_node = () => {
     const node = this.graph.create_node();
     return node;
