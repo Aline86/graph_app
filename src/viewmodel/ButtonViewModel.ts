@@ -1,52 +1,54 @@
 import type CustomEvents from "../events/CustomEvents";
 import Button from "../model/Button";
-import type Graph from "../model/Graph";
 
 export default class ButtonViewModel {
   bus: CustomEvents;
-  graph: Graph;
-  constructor(graph: Graph, bus: CustomEvents) {
+  buttons: Button;
+
+  constructor(bus: CustomEvents, buttons: Button) {
     this.bus = bus;
-    this.graph = graph;
+    this.buttons = buttons;
   }
   get_button = (id: string) => {
-    const button = Button.get(id);
+    const button = this.buttons.get(id);
     if (button) {
       return button;
     }
   };
   change_button_state = (id: string, state: string) => {
-    const button = Button.get(id);
+    const button = this.buttons.get(id);
     if (button) {
       button.set_state(state);
     }
   };
-  is_adequate_target_for_arrow(target: string) {
-    return this.graph.nodes[target] !== undefined;
-  }
+
   toggle_state_state = (id: string) => {
-    const button = Button.get(id);
+    const button = this.buttons.get(id);
     if (button) {
       if (button.state === "none" || button.state === "inactive") {
         button.set_state("active");
+        this.notify_button(button);
       } else {
-        button.set_state(button.state === "activated" ? "active" : "activated");
+        if (button.id) this.deactivate_other_buttons(button);
       }
-      this.deactivate_other_buttons(button.id);
-      this.notify_button(button);
     }
   };
-  deactivate_other_buttons(id: string) {
-    for (const button of Button.buttons) {
-      if (button.id === id) continue;
-      button.set_state("active");
-      this.notify_button(button);
+  show_buttons() {
+    this.bus.activate_buttons();
+  }
+  deactivate_other_buttons(button: Button) {
+    for (const _id in this.buttons.buttons) {
+      if (_id === button.id) {
+        button.set_state("activated");
+        this.notify_button(button);
+      } else {
+        this.buttons.get(_id).set_state("active");
+        this.notify_button(this.buttons.get(_id));
+      }
     }
   }
-  create_button(name: string) {
-    const button = new Button(name);
-
-    return button;
+  create_button() {
+    return this.buttons.add();
   }
   notify_button(button: Button) {
     this.bus.notify_button_state_change(button);

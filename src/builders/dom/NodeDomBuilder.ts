@@ -1,26 +1,34 @@
 import type CustomEvents from "../../events/CustomEvents";
-import ButtonSingleton from "../../singleton/ButtonSingleton";
+import ButtonFactory from "../../factory/ButtonFactory";
+
 import type Node from "../../model/Node";
 import type { FigureAction } from "../../registry/FigureRegistry";
 import FigureRegistry from "../../registry/FigureRegistry";
 
 import type NodeViewModel from "../../viewmodel/NodeViewModel";
 import type DomBuilder from "./DomBuilder";
+import type Button from "../../model/Button";
 
 export default class NodeDomBuilder implements DomBuilder<Node> {
   node_vm: NodeViewModel;
   bus: CustomEvents;
   container: HTMLElement;
   actions: FigureAction<any>[] | undefined;
+  button_factory: ButtonFactory;
+
+  buttons: Button;
 
   constructor(
-    node_vm: NodeViewModel,
-    container: HTMLElement,
     bus: CustomEvents,
+    container: HTMLElement,
+    node_vm: NodeViewModel,
+    buttons: Button,
   ) {
+    this.bus = bus;
+    this.buttons = buttons;
     this.node_vm = node_vm;
     this.actions = [];
-
+    this.button_factory = new ButtonFactory(bus, buttons);
     this.bus = bus;
     this.container = container;
     this.on_load_node();
@@ -83,7 +91,7 @@ export default class NodeDomBuilder implements DomBuilder<Node> {
   };
   add_node_button = (): void => {
     if (this.container) {
-      ButtonSingleton.create_button(
+      this.button_factory.create_button(
         "click",
         "Ajouter un noeud",
         this.container.id + "_add_node",

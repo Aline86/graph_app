@@ -1,5 +1,6 @@
 import type AlgorithmEvents from "../../events/AgorithmEvents";
 import type Module from "../../interface/Module";
+import type Button from "../../model/Button";
 import type Graph from "../../model/Graph";
 import BFSModule from "./bfs/BFSModule";
 
@@ -10,7 +11,7 @@ export default class AlgorithmModule implements Module {
     this.graph = graph;
   }
 
-  install(bus: AlgorithmEvents, container: HTMLElement) {
-    new BFSModule(this.graph, bus, container);
+  install(bus: AlgorithmEvents, container: HTMLElement, buttons: Button) {
+    new BFSModule(this.graph, bus, container, buttons);
   }
 }

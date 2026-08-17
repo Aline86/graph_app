@@ -1,19 +1,17 @@
 import type PaletteDomBuilder from "../builders/dom/PaletteDomBuilder";
 import type CustomEvents from "../events/CustomEvents";
 import type Node from "../model/Node";
-import type ButtonViewModel from "../viewmodel/ButtonViewModel";
+
 
 export default class PaletteEventHandler {
   bus: CustomEvents;
   activeNode: string | null = null;
   nodes: Record<string, Node>;
   palette_db: PaletteDomBuilder;
-  button_vm: ButtonViewModel;
   container: HTMLElement | null;
 
   constructor(
     palette_db: PaletteDomBuilder,
-    button_vm: ButtonViewModel,
     container: HTMLElement,
     nodes: Record<string, Node>,
     bus: CustomEvents,
@@ -22,7 +20,6 @@ export default class PaletteEventHandler {
     this.nodes = nodes;
     this.bus = bus;
     this.palette_db = palette_db;
-    this.button_vm = button_vm;
     this.activate_palette_actions();
   }
 

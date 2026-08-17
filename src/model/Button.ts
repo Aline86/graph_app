@@ -1,17 +1,38 @@
-export default class Button {
-  id: string;
-  state: string;
-  static buttons: Button[] = [];
+import ButtonCollection from "./ButtonCollection";
 
-  constructor(id: string) {
-    this.id = id;
-    this.state = "unvisible";
-    Button.buttons.push(this);
+export default class Button extends ButtonCollection {
+  state: string;
+  id: string | null;
+  constructor() {
+    super();
+    this.id = null;
+
+    this.state = "none";
   }
-  static get(id: string): Button | undefined {
-    return Button.buttons.find((b) => b.id === id);
-  }
+
   set_state(state: string) {
     this.state = state;
+  }
+
+  add(id?: string): Button {
+    const button = new Button();
+    if (id) {
+      button.id = id;
+    } else {
+      button.id = crypto.randomUUID();
+    }
+    this.buttons[button.id] = button;
+
+    return button;
+  }
+  get(id: string) {
+    console.log(this.buttons);
+    return this.buttons[id];
+  }
+  all() {
+    return Object.values(this.buttons);
+  }
+  remove(id: string) {
+    delete this.buttons[id];
   }
 }

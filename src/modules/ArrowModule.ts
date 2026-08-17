@@ -17,7 +17,7 @@ export default class ArrowModule implements Module {
 
     FigureRegistry.register({
       actions_id: this.graph.id + "_palette",
-      id: this.graph.id + "_" + "button_draw_arrow",
+      id: this.graph.id + "_button_draw_arrow",
       class_name: "button_draw_arrow",
       name: "dessiner les flèches",
       action: "click",

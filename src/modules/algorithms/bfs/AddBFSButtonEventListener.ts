@@ -1,31 +1,29 @@
-import ButtonSingleton from "../../../singleton/ButtonSingleton";
 import FigureRegistry from "../../../registry/FigureRegistry";
-
-import type BFSDomBuilder from "./BFSDomBuilder";
+import type ButtonFactory from "../../../factory/ButtonFactory";
 
 export default class AddBFSButtonEventListener {
-  container: HTMLElement;
-  bfs_db: BFSDomBuilder;
-  constructor(container: HTMLElement, bfs_db: BFSDomBuilder) {
-    this.container = container;
-    this.bfs_db = bfs_db;
+  graph_id: string;
+  button_factory: ButtonFactory;
+  constructor(container: string, button_factory: ButtonFactory) {
+    this.graph_id = container;
+    this.button_factory = button_factory;
     this.add_node_button();
   }
 
   remove_action = () => {};
   add_node_button = (): void => {
-    const actions = FigureRegistry.get(this.container.id + "_play_bfs");
+    const actions = FigureRegistry.get(this.graph_id + "_play_bfs");
 
-    if (this.container && actions) {
+    if (this.graph_id && actions) {
       for (const key in actions) {
         const action = actions[key];
-        ButtonSingleton.create_button(
+        this.button_factory.create_button(
           action.action,
           action.name,
           action.id,
           action.class_name,
           action.handler,
-          this.container.id,
+          this.graph_id,
           action.mode,
         );
       }

@@ -1,6 +1,7 @@
 import MenuDomBuilder from "../builders/dom/MenuDomBuilder";
 import type CustomEvents from "../events/CustomEvents";
 import type Module from "../interface/Module";
+import type Button from "../model/Button";
 import type Graph from "../model/Graph";
 import FigureRegistry from "../registry/FigureRegistry";
 import NodeView from "../view/NodeView";
@@ -12,10 +13,10 @@ export default class NodeModule implements Module {
     this.graph = graph;
   }
 
-  install(bus: CustomEvents, container: HTMLElement) {
+  install(bus: CustomEvents, container: HTMLElement, buttons: Button) {
     const node_vm = new NodeViewModel(this.graph, bus);
     new MenuDomBuilder(container, bus);
-    const node_view = new NodeView(container, node_vm, bus);
+    const node_view = new NodeView(bus, container, node_vm, buttons);
     FigureRegistry.register({
       actions_id: container.id + "_menu_node",
       name: "renommer le noeud",
