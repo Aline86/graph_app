@@ -60,8 +60,7 @@ export default class ButtonFactory {
         if (trigger_action !== "") {
           button.addEventListener(trigger_action, () => {
             this.bus.deactivate_all_actions();
-            if (toggleable)
-              this.button_vm.toggle_state_state(button.id);
+            if (toggleable) this.button_vm.toggle_state_state(button.id);
 
             bus.active_action_key = button.id;
             action(B);

@@ -60,8 +60,9 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
   update_button_state = (id: string, state: string): void => {
     const el = document.getElementById(id);
 
-    if (el) el.className = state;
-    console.log("el", el);
+    if (!el) return;
+    el.classList.remove("none", "active", "activated");
+    el.classList.add(state);
   };
 
   update = () => {};
