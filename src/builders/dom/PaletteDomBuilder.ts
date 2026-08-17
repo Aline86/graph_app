@@ -80,7 +80,7 @@ export default class PaletteDomBuilder implements DomBuilder<Button> {
   activate_buttons = () => {
     this.bus.addEventListener("activate:buttons", () => {
       const actions = FigureRegistry.get(this.graph.id + "_palette");
-      console.log("action", actions);
+
       if (actions)
         for (const action of actions) {
           this.button_vm.change_button_state(action.id, action.mode);

@@ -109,7 +109,7 @@ export default class BFSDomBuilder implements DomBuilder<Button> {
   activate_buttons = () => {
     this.bus.addEventListener("activate:buttons", () => {
       const actions = FigureRegistry.get(this.container + "_play_bfs");
-      console.log("action22", actions, this.container + "_play_bfs");
+
       if (actions)
         for (const action of actions) {
           this.button_vm.change_button_state(action.id, action.mode);

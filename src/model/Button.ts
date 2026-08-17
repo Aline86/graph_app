@@ -24,7 +24,7 @@ export default class Button {
     return button;
   }
   get(id: string) {
-    console.log(this.buttons);
+
     return this.buttons[id];
   }
   all() {
