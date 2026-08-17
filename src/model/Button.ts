@@ -1,10 +1,8 @@
-import ButtonCollection from "./ButtonCollection";
-
-export default class Button extends ButtonCollection {
+export default class Button {
+  buttons: Record<string, Button> = {};
   state: string;
   id: string | null;
   constructor() {
-    super();
     this.id = null;
 
     this.state = "none";
